@@ -10,9 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Database connection settings
     $servername = "localhost"; // Replace with your MySQL server name
-    $username = "u339725174_maisonform1"; // Replace with your MySQL username
+    $username = "u339725174_central"; // Replace with your MySQL username
     $password = "Maison@123"; // Replace with your MySQL password
-    $dbname = "u339725174_maisonform"; // Replace with your MySQL database name
+    $dbname = "u339725174_centralpark"; // Replace with your MySQL database name
 
     try {
         // Create a new PDO instance
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare and execute the database query
-        $stmt = $conn->prepare("INSERT INTO ContactForm1 (name, email, contact_number) VALUES (:name, :email, :contactNumber)");
+        $stmt = $conn->prepare("INSERT INTO ContactForm (name, email, contact_number) VALUES (:name, :email, :contactNumber)");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':contactNumber', $contactNumber);
