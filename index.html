@@ -1,0 +1,2495 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: https://ogp.me/ns#">
+
+<head>
+  <style>
+    /* Styles for the trigger button */
+    #open-popup {
+      cursor: pointer;
+    }
+
+    /* Styles for the popup container */
+    #popup-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Semi-transparent background */
+      z-index: 99999999;
+      /* Ensure it's above other content */
+    }
+
+    /* Styles for the popup content */
+    #popup-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Styles for the close button */
+    #close-popup {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 24px;
+    }
+  </style>
+
+
+
+
+
+
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    var two_worker_data_critical_data = {
+      critical_data: {
+        critical_css: false,
+        critical_fonts: false,
+      },
+    };
+  </script>
+  <script src="https://kit.fontawesome.com/9c5eb2a5cc.js" crossorigin="anonymous"></script>
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    var two_worker_data_font = {
+      font: [],
+    };
+  </script>
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    var two_worker_data_excluded_js = {
+      js: [],
+    };
+  </script>
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    var two_worker_data_js = {
+      js: [
+        {
+          inline: true,
+          code: "JTBBd2luZG93Ll93cGVtb2ppU2V0dGluZ3MlMjAlM0QlMjAlN0IlMjJiYXNlVXJsJTIyJTNBJTIyaHR0cHMlM0ElNUMlMkYlNUMlMkZzLncub3JnJTVDJTJGaW1hZ2VzJTVDJTJGY29yZSU1QyUyRmVtb2ppJTVDJTJGMTQuMC4wJTVDJTJGNzJ4NzIlNUMlMkYlMjIlMkMlMjJleHQlMjIlM0ElMjIucG5nJTIyJTJDJTIyc3ZnVXJsJTIyJTNBJTIyaHR0cHMlM0ElNUMlMkYlNUMlMkZzLncub3JnJTVDJTJGaW1hZ2VzJTVDJTJGY29yZSU1QyUyRmVtb2ppJTVDJTJGMTQuMC4wJTVDJTJGc3ZnJTVDJTJGJTIyJTJDJTIyc3ZnRXh0JTIyJTNBJTIyLnN2ZyUyMiUyQyUyMnNvdXJjZSUyMiUzQSU3QiUyMmNvbmNhdGVtb2ppJTIyJTNBJTIyaHR0cHMlM0ElNUMlMkYlNUMlMkZwcm9wZXJ0eWluZ3VydWdyYW0uaW4lNUMlMkZ3cC1pbmNsdWRlcyU1QyUyRmpzJTVDJTJGd3AtZW1vamktcmVsZWFzZS5taW4uanMlM0Z2ZXIlM0Q2LjEuMyUyMiU3RCU3RCUzQiUwQSUyRiUyQSUyMSUyMFRoaXMlMjBmaWxlJTIwaXMlMjBhdXRvLWdlbmVyYXRlZCUyMCUyQSUyRiUwQSUyMWZ1bmN0aW9uJTI4ZSUyQ2ElMkN0JTI5JTdCdmFyJTIwbiUyQ3IlMkNvJTJDaSUzRGEuY3JlYXRlRWxlbWVudCUyOCUyMmNhbnZhcyUyMiUyOSUyQ3AlM0RpLmdldENvbnRleHQlMjYlMjZpLmdldENvbnRleHQlMjglMjIyZCUyMiUyOSUzQmZ1bmN0aW9uJTIwcyUyOGUlMkN0JTI5JTdCdmFyJTIwYSUzRFN0cmluZy5mcm9tQ2hhckNvZGUlMkNlJTNEJTI4cC5jbGVhclJlY3QlMjgwJTJDMCUyQ2kud2lkdGglMkNpLmhlaWdodCUyOSUyQ3AuZmlsbFRleHQlMjhhLmFwcGx5JTI4dGhpcyUyQ2UlMjklMkMwJTJDMCUyOSUyQ2kudG9EYXRhVVJMJTI4JTI5JTI5JTNCcmV0dXJuJTIwcC5jbGVhclJlY3QlMjgwJTJDMCUyQ2kud2lkdGglMkNpLmhlaWdodCUyOSUyQ3AuZmlsbFRleHQlMjhhLmFwcGx5JTI4dGhpcyUyQ3QlMjklMkMwJTJDMCUyOSUyQ2UlM0QlM0QlM0RpLnRvRGF0YVVSTCUyOCUyOSU3RGZ1bmN0aW9uJTIwYyUyOGUlMjklN0J2YXIlMjB0JTNEYS5jcmVhdGVFbGVtZW50JTI4JTIyc2NyaXB0JTIyJTI5JTNCdC5zcmMlM0RlJTJDdC5kZWZlciUzRHQudHlwZSUzRCUyMnRleHQlMkZqYXZhc2NyaXB0JTIyJTJDYS5nZXRFbGVtZW50c0J5VGFnTmFtZSUyOCUyMmhlYWQlMjIlMjklNUIwJTVELmFwcGVuZENoaWxkJTI4dCUyOSU3RGZvciUyOG8lM0RBcnJheSUyOCUyMmZsYWclMjIlMkMlMjJlbW9qaSUyMiUyOSUyQ3Quc3VwcG9ydHMlM0QlN0JldmVyeXRoaW5nJTNBJTIxMCUyQ2V2ZXJ5dGhpbmdFeGNlcHRGbGFnJTNBJTIxMCU3RCUyQ3IlM0QwJTNCciUzQ28ubGVuZ3RoJTNCciUyQiUyQiUyOXQuc3VwcG9ydHMlNUJvJTVCciU1RCU1RCUzRGZ1bmN0aW9uJTI4ZSUyOSU3QmlmJTI4cCUyNiUyNnAuZmlsbFRleHQlMjlzd2l0Y2glMjhwLnRleHRCYXNlbGluZSUzRCUyMnRvcCUyMiUyQ3AuZm9udCUzRCUyMjYwMCUyMDMycHglMjBBcmlhbCUyMiUyQ2UlMjklN0JjYXNlJTIyZmxhZyUyMiUzQXJldHVybiUyMHMlMjglNUIxMjc5ODclMkM2NTAzOSUyQzgyMDUlMkM5ODk1JTJDNjUwMzklNUQlMkMlNUIxMjc5ODclMkM2NTAzOSUyQzgyMDMlMkM5ODk1JTJDNjUwMzklNUQlMjklM0YlMjExJTNBJTIxcyUyOCU1QjU1MzU2JTJDNTY4MjYlMkM1NTM1NiUyQzU2ODE5JTVEJTJDJTVCNTUzNTYlMkM1NjgyNiUyQzgyMDMlMkM1NTM1NiUyQzU2ODE5JTVEJTI5JTI2JTI2JTIxcyUyOCU1QjU1MzU2JTJDNTczMzIlMkM1NjEyOCUyQzU2NDIzJTJDNTYxMjglMkM1NjQxOCUyQzU2MTI4JTJDNTY0MjElMkM1NjEyOCUyQzU2NDMwJTJDNTYxMjglMkM1NjQyMyUyQzU2MTI4JTJDNTY0NDclNUQlMkMlNUI1NTM1NiUyQzU3MzMyJTJDODIwMyUyQzU2MTI4JTJDNTY0MjMlMkM4MjAzJTJDNTYxMjglMkM1NjQxOCUyQzgyMDMlMkM1NjEyOCUyQzU2NDIxJTJDODIwMyUyQzU2MTI4JTJDNTY0MzAlMkM4MjAzJTJDNTYxMjglMkM1NjQyMyUyQzgyMDMlMkM1NjEyOCUyQzU2NDQ3JTVEJTI5JTNCY2FzZSUyMmVtb2ppJTIyJTNBcmV0dXJuJTIxcyUyOCU1QjEyOTc3NyUyQzEyNzk5NSUyQzgyMDUlMkMxMjk3NzglMkMxMjc5OTklNUQlMkMlNUIxMjk3NzclMkMxMjc5OTUlMkM4MjAzJTJDMTI5Nzc4JTJDMTI3OTk5JTVEJTI5JTdEcmV0dXJuJTIxMSU3RCUyOG8lNUJyJTVEJTI5JTJDdC5zdXBwb3J0cy5ldmVyeXRoaW5nJTNEdC5zdXBwb3J0cy5ldmVyeXRoaW5nJTI2JTI2dC5zdXBwb3J0cyU1Qm8lNUJyJTVEJTVEJTJDJTIyZmxhZyUyMiUyMSUzRCUzRG8lNUJyJTVEJTI2JTI2JTI4dC5zdXBwb3J0cy5ldmVyeXRoaW5nRXhjZXB0RmxhZyUzRHQuc3VwcG9ydHMuZXZlcnl0aGluZ0V4Y2VwdEZsYWclMjYlMjZ0LnN1cHBvcnRzJTVCbyU1QnIlNUQlNUQlMjklM0J0LnN1cHBvcnRzLmV2ZXJ5dGhpbmdFeGNlcHRGbGFnJTNEdC5zdXBwb3J0cy5ldmVyeXRoaW5nRXhjZXB0RmxhZyUyNiUyNiUyMXQuc3VwcG9ydHMuZmxhZyUyQ3QuRE9NUmVhZHklM0QlMjExJTJDdC5yZWFkeUNhbGxiYWNrJTNEZnVuY3Rpb24lMjglMjklN0J0LkRPTVJlYWR5JTNEJTIxMCU3RCUyQ3Quc3VwcG9ydHMuZXZlcnl0aGluZyU3QyU3QyUyOG4lM0RmdW5jdGlvbiUyOCUyOSU3QnQucmVhZHlDYWxsYmFjayUyOCUyOSU3RCUyQ2EuYWRkRXZlbnRMaXN0ZW5lciUzRiUyOGEuYWRkRXZlbnRMaXN0ZW5lciUyOCUyMkRPTUNvbnRlbnRMb2FkZWQlMjIlMkNuJTJDJTIxMSUyOSUyQ2UuYWRkRXZlbnRMaXN0ZW5lciUyOCUyMmxvYWQlMjIlMkNuJTJDJTIxMSUyOSUyOSUzQSUyOGUuYXR0YWNoRXZlbnQlMjglMjJvbmxvYWQlMjIlMkNuJTI5JTJDYS5hdHRhY2hFdmVudCUyOCUyMm9ucmVhZHlzdGF0ZWNoYW5nZSUyMiUyQ2Z1bmN0aW9uJTI4JTI5JTdCJTIyY29tcGxldGUlMjIlM0QlM0QlM0RhLnJlYWR5U3RhdGUlMjYlMjZ0LnJlYWR5Q2FsbGJhY2slMjglMjklN0QlMjklMjklMkMlMjhlJTNEdC5zb3VyY2UlN0MlN0MlN0IlN0QlMjkuY29uY2F0ZW1vamklM0ZjJTI4ZS5jb25jYXRlbW9qaSUyOSUzQWUud3BlbW9qaSUyNiUyNmUudHdlbW9qaSUyNiUyNiUyOGMlMjhlLnR3ZW1vamklMjklMkNjJTI4ZS53cGVtb2ppJTI5JTI5JTI5JTdEJTI4d2luZG93JTJDZG9jdW1lbnQlMkN3aW5kb3cuX3dwZW1vamlTZXR0aW5ncyUyOSUzQiUwQQ==",
+          id: "",
+          uid: "two_64f85683b765d",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/jquery\/jquery.min.js?ver=3.6.1",
+          id: "jquery-core-js",
+          uid: "two_64f85683b76d4",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/jquery\/jquery-migrate.min.js?ver=3.3.2",
+          id: "jquery-migrate-js",
+          uid: "two_64f85683b76f8",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/imagesloaded.min.js?ver=6.1.3",
+          id: "imagesLoaded-js",
+          uid: "two_64f85683b770c",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/sticky-header-effects-for-elementor\/assets\/js\/she-header.js?ver=1.6.5",
+          id: "she-header-js",
+          uid: "two_64f85683b771e",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/www.googletagmanager.com\/gtag\/js?id=UA-189724853-1",
+          id: "google_gtagjs-js",
+          uid: "two_64f85683b7731",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTBBd2luZG93LmRhdGFMYXllciUyMCUzRCUyMHdpbmRvdy5kYXRhTGF5ZXIlMjAlN0MlN0MlMjAlNUIlNUQlM0JmdW5jdGlvbiUyMGd0YWclMjglMjklN0JkYXRhTGF5ZXIucHVzaCUyOGFyZ3VtZW50cyUyOSUzQiU3RCUwQWd0YWclMjglMjdzZXQlMjclMkMlMjAlMjdsaW5rZXIlMjclMkMlMjAlN0IlMjJkb21haW5zJTIyJTNBJTVCJTIycHJvcGVydHlpbmd1cnVncmFtLmluJTIyJTVEJTdEJTIwJTI5JTNCJTBBZ3RhZyUyOCUyMmpzJTIyJTJDJTIwbmV3JTIwRGF0ZSUyOCUyOSUyOSUzQiUwQWd0YWclMjglMjJzZXQlMjIlMkMlMjAlMjJkZXZlbG9wZXJfaWQuZFpUTmlNVCUyMiUyQyUyMHRydWUlMjklM0IlMEFndGFnJTI4JTIyY29uZmlnJTIyJTJDJTIwJTIyVUEtMTg5NzI0ODUzLTElMjIlMkMlMjAlN0IlMjJhbm9ueW1pemVfaXAlMjIlM0F0cnVlJTdEJTI5JTNCJTBBZ3RhZyUyOCUyMmNvbmZpZyUyMiUyQyUyMCUyMkctOVJQMEZUUFA4MSUyMiUyOSUzQiUwQQ==",
+          id: "google_gtagjs-js-after",
+          uid: "two_64f85683b7743",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTI4ZnVuY3Rpb24lMjh3JTJDZCUyQ3MlMkNsJTJDaSUyOSU3QnclNUJsJTVEJTNEdyU1QmwlNUQlN0MlN0MlNUIlNUQlM0J3JTVCbCU1RC5wdXNoJTI4JTdCJTI3Z3RtLnN0YXJ0JTI3JTNBJTBBbmV3JTIwRGF0ZSUyOCUyOS5nZXRUaW1lJTI4JTI5JTJDZXZlbnQlM0ElMjdndG0uanMlMjclN0QlMjklM0J2YXIlMjBmJTNEZC5nZXRFbGVtZW50c0J5VGFnTmFtZSUyOHMlMjklNUIwJTVEJTJDJTBBaiUzRGQuY3JlYXRlRWxlbWVudCUyOHMlMjklMkNkbCUzRGwlMjElM0QlMjdkYXRhTGF5ZXIlMjclM0YlMjclMjZsJTNEJTI3JTJCbCUzQSUyNyUyNyUzQmouYXN5bmMlM0R0cnVlJTNCai5zcmMlM0QlMEElMjdodHRwcyUzQSUyRiUyRnd3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbSUyRmd0bS5qcyUzRmlkJTNEJTI3JTJCaSUyQmRsJTNCZi5wYXJlbnROb2RlLmluc2VydEJlZm9yZSUyOGolMkNmJTI5JTNCJTBBJTdEJTI5JTI4d2luZG93JTJDZG9jdW1lbnQlMkMlMjdzY3JpcHQlMjclMkMlMjdkYXRhTGF5ZXIlMjclMkMlMjdHVE0tTko3MzZEOSUyNyUyOSUzQg==",
+          id: "",
+          uid: "two_64f85683b7760",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTBBJTIwJTIwJTIwJTIwJTI4ZnVuY3Rpb24lMjAlMjglMjklMjAlN0IlMEElMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjB2YXIlMjBvcHRpb25zJTIwJTNEJTIwJTdCJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwd2hhdHNhcHAlM0ElMjAlMjIlMkI5MTk5NTM5NjE3NzElMjIlMkMlMjAlMkYlMkYlMjBXaGF0c0FwcCUyMG51bWJlciUwQSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMGNhbGxfdG9fYWN0aW9uJTNBJTIwJTIyTWVzc2FnZSUyMHVzJTIyJTJDJTIwJTJGJTJGJTIwQ2FsbCUyMHRvJTIwYWN0aW9uJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwcG9zaXRpb24lM0ElMjAlMjJsZWZ0JTIyJTJDJTIwJTJGJTJGJTIwUG9zaXRpb24lMjBtYXklMjBiZSUyMCUyN3JpZ2h0JTI3JTIwb3IlMjAlMjdsZWZ0JTI3JTBBJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwcHJlX2ZpbGxlZF9tZXNzYWdlJTNBJTIwJTIySGklMkMlMjBJJTIwYW0lMjBpbnRlcmVzdGVkJTIwaW4lMjBDZW50cmFsJTIwUGFyayUyMFNlY3RvciUyMDEwNCUyMEd1cmdhb24lMjIlMkMlMjAlMkYlMkYlMjBXaGF0c0FwcCUyMHByZS1maWxsZWQlMjBtZXNzYWdlJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTdEJTNCJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwdmFyJTIwcHJvdG8lMjAlM0QlMjBkb2N1bWVudC5sb2NhdGlvbi5wcm90b2NvbCUyQyUyMGhvc3QlMjAlM0QlMjAlMjJnZXRidXR0b24uaW8lMjIlMkMlMjB1cmwlMjAlM0QlMjBwcm90byUyMCUyQiUyMCUyMiUyRiUyRnN0YXRpYy4lMjIlMjAlMkIlMjBob3N0JTNCJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwdmFyJTIwcyUyMCUzRCUyMGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQlMjglMjdzY3JpcHQlMjclMjklM0IlMjBzLnR5cGUlMjAlM0QlMjAlMjd0ZXh0JTJGamF2YXNjcmlwdCUyNyUzQiUyMHMuYXN5bmMlMjAlM0QlMjB0cnVlJTNCJTIwcy5zcmMlMjAlM0QlMjB1cmwlMjAlMkIlMjAlMjclMkZ3aWRnZXQtc2VuZC1idXR0b24lMkZqcyUyRmluaXQuanMlMjclM0IlMEElMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBzLm9ubG9hZCUyMCUzRCUyMGZ1bmN0aW9uJTIwJTI4JTI5JTIwJTdCJTIwV2hXaWRnZXRTZW5kQnV0dG9uLmluaXQlMjhob3N0JTJDJTIwcHJvdG8lMkMlMjBvcHRpb25zJTI5JTNCJTIwJTdEJTNCJTBBJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwdmFyJTIweCUyMCUzRCUyMGRvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lJTI4JTI3c2NyaXB0JTI3JTI5JTVCMCU1RCUzQiUyMHgucGFyZW50Tm9kZS5pbnNlcnRCZWZvcmUlMjhzJTJDJTIweCUyOSUzQiUwQSUyMCUyMCUyMCUyMCU3RCUyOSUyOCUyOSUzQiUwQQ==",
+          id: "",
+          uid: "two_64f85683b777a",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/underscore.min.js?ver=1.13.4",
+          id: "underscore-js",
+          uid: "two_64f85683b77ad",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTBBJTJGJTJBJTIwJTNDJTIxJTVCQ0RBVEElNUIlMjAlMkElMkYlMEF2YXIlMjBfd3BVdGlsU2V0dGluZ3MlMjAlM0QlMjAlN0IlMjJhamF4JTIyJTNBJTdCJTIydXJsJTIyJTNBJTIyJTVDJTJGd3AtYWRtaW4lNUMlMkZhZG1pbi1hamF4LnBocCUyMiU3RCU3RCUzQiUwQSUyRiUyQSUyMCU1RCU1RCUzRSUyMCUyQSUyRiUwQQ==",
+          id: "wp-util-js-extra",
+          uid: "two_64f85683b77d0",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/wp-util.min.js?ver=6.1.3",
+          id: "wp-util-js",
+          uid: "two_64f85683b77f5",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/jet-search\/assets\/lib\/chosen\/chosen.jquery.min.js?ver=1.8.7",
+          id: "jquery-chosen-js",
+          uid: "two_64f85683b7818",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/jet-search\/assets\/js\/jet-search.js?ver=3.0.3",
+          id: "jet-search-js",
+          uid: "two_64f85683b783a",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor-pro\/assets\/lib\/smartmenus\/jquery.smartmenus.min.js?ver=1.0.1",
+          id: "smartmenus-js",
+          uid: "two_64f85683b785b",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTBBJTJGJTJBJTIwJTNDJTIxJTVCQ0RBVEElNUIlMjAlMkElMkYlMEF2YXIlMjBKZXRFbmdpbmVTZXR0aW5ncyUyMCUzRCUyMCU3QiUyMmFqYXh1cmwlMjIlM0ElMjJodHRwcyUzQSU1QyUyRiU1QyUyRnByb3BlcnR5aW5ndXJ1Z3JhbS5pbiU1QyUyRndwLWFkbWluJTVDJTJGYWRtaW4tYWpheC5waHAlMjIlMkMlMjJhamF4bGlzdGluZyUyMiUzQSUyMmh0dHBzJTNBJTVDJTJGJTVDJTJGcHJvcGVydHlpbmd1cnVncmFtLmluJTVDJTJGcmVzaWRlbnRpYWwlNUMlMkZjZW50cmFsLXBhcmstc2VjdG9yLTEwNC1ndXJnYW9uJTVDJTJGJTNGbm9jYWNoZSUzRDE2OTM5OTY2NzQlMjIlMkMlMjJob3ZlckFjdGlvblRpbWVvdXQlMjIlM0ElMjI0MDAlMjIlN0QlM0IlMEElMkYlMkElMjAlNUQlNUQlM0UlMjAlMkElMkYlMEE=",
+          id: "jet-engine-frontend-js-extra",
+          uid: "two_64f85683b787d",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTBBJTA5JTA5JTA5d2luZG93LkpldEVuZ2luZVN0b3JlcyUyMCUzRCUyMHdpbmRvdy5KZXRFbmdpbmVTdG9yZXMlMjAlN0MlN0MlMjAlN0IlN0QlM0IlMEElMDklMDklMDl3aW5kb3cuSmV0RW5naW5lU3RvcmVzJTVCJTI3bG9jYWwtc3RvcmFnZSUyNyU1RCUyMCUzRCUyMCU3QiUwQSUwOSUwOSUwOSUwOWFkZFRvU3RvcmUlM0ElMjBmdW5jdGlvbiUyOCUyMHN0b3JlU2x1ZyUyQyUyMHBvc3RJRCUyQyUyMG1heFNpemUlMkMlMjBpc09uVmlld1N0b3JlJTIwJTI5JTIwJTdCJTBBJTA5JTA5JTA5JTA5JTA5JTBBJTA5JTA5dmFyJTIwc3RvcmUlMjAlM0QlMjB3aW5kb3cubG9jYWxTdG9yYWdlLmdldEl0ZW0lMjglMjAlMjdqZXRfZW5naW5lX3N0b3JlXyUyNyUyMCUyQiUyMHN0b3JlU2x1ZyUyMCUyOSUzQiUwQSUwOSUwOWlzT25WaWV3U3RvcmUlMjAlM0QlMjBpc09uVmlld1N0b3JlJTIwJTdDJTdDJTIwZmFsc2UlM0IlMEElMEElMDklMDlpZiUyMCUyOCUyMHN0b3JlJTIwJTI5JTIwJTdCJTBBJTA5JTA5JTA5c3RvcmUlMjAlM0QlMjBzdG9yZS5zcGxpdCUyOCUyMCUyNyUyQyUyNyUyMCUyOSUzQiUwQSUwOSUwOSU3RCUyMGVsc2UlMjAlN0IlMEElMDklMDklMDlzdG9yZSUyMCUzRCUyMCU1QiU1RCUzQiUwQSUwOSUwOSU3RCUwQSUwQSUwOSUwOXBvc3RJRCUyMCUzRCUyMCUyNyUyNyUyMCUyQiUyMHBvc3RJRCUzQiUwQSUwQSUwOSUwOW1heFNpemUlMjAlM0QlMjBwYXJzZUludCUyOCUyMG1heFNpemUlMkMlMjAxMCUyMCUyOSUzQiUwQSUwQSUwOSUwOWlmJTIwJTI4JTIwMCUyMCUzQyUzRCUyMHN0b3JlLmluZGV4T2YlMjglMjBwb3N0SUQlMjAlMjklMjAlMjklMjAlN0IlMEElMDklMDklMDlyZXR1cm4lMjBzdG9yZS5sZW5ndGglM0IlMEElMDklMDklN0QlMEElMEElMDklMDlpZiUyMCUyOCUyMDAlMjAlM0MlMjBtYXhTaXplJTIwJTI2JTI2JTIwc3RvcmUubGVuZ3RoJTIwJTNFJTNEJTIwbWF4U2l6ZSUyMCUyOSUyMCU3QiUwQSUwOSUwOSUwOSUwQSUwOSUwOSUwOWlmJTIwJTI4JTIwaXNPblZpZXdTdG9yZSUyMCUyOSUyMCU3QiUwQSUwOSUwOSUwOSUwOXN0b3JlLnNwbGljZSUyOCUyMDAlMkMlMjAxJTIwJTI5JTNCJTBBJTA5JTA5JTA5JTdEJTIwZWxzZSUyMCU3QiUwQSUwOSUwOSUwOSUwOWFsZXJ0JTI4JTIwJTI3WW91JTIwY2FuJTYwdCUyMGFkZCUyMG1vcmUlMjBwb3N0cyUyNyUyMCUyOSUzQiUwQSUwOSUwOSUwOSUwOXJldHVybiUyMGZhbHNlJTNCJTBBJTA5JTA5JTA5JTdEJTBBJTA5JTA5JTBBJTA5JTA5JTdEJTBBJTBBJTA5JTA5c3RvcmUucHVzaCUyOCUyMHBvc3RJRCUyMCUyOSUzQiUwQSUwQSUwOSUwOXdpbmRvdy5sb2NhbFN0b3JhZ2Uuc2V0SXRlbSUyOCUyMCUyN2pldF9lbmdpbmVfc3RvcmVfJTI3JTIwJTJCJTIwc3RvcmVTbHVnJTJDJTIwc3RvcmUuam9pbiUyOCUyMCUyNyUyQyUyNyUyMCUyOSUyMCUyOSUzQiUwQSUwQSUwOSUwOXJldHVybiUyMHN0b3JlLmxlbmd0aCUzQiUwQSUwQSUwOSUwOSUwQSUwOSUwOSUwOSUwOSU3RCUyQyUwQSUwOSUwOSUwOSUwOXJlbW92ZSUzQSUyMGZ1bmN0aW9uJTI4JTIwc3RvcmVTbHVnJTJDJTIwcG9zdElEJTIwJTI5JTIwJTdCJTBBJTA5JTA5JTA5JTA5JTA5JTBBJTA5JTA5dmFyJTIwc3RvcmUlMjAlM0QlMjB3aW5kb3cubG9jYWxTdG9yYWdlLmdldEl0ZW0lMjglMjAlMjdqZXRfZW5naW5lX3N0b3JlXyUyNyUyMCUyQiUyMHN0b3JlU2x1ZyUyMCUyOSUyQyUwQSUwOSUwOSUwOWluZGV4JTNCJTBBJTBBJTA5JTA5aWYlMjAlMjglMjBzdG9yZSUyMCUyOSUyMCU3QiUwQSUwOSUwOSUwOXN0b3JlJTIwJTNEJTIwc3RvcmUuc3BsaXQlMjglMjAlMjclMkMlMjclMjAlMjklM0IlMEElMDklMDklN0QlMjBlbHNlJTIwJTdCJTBBJTA5JTA5JTA5c3RvcmUlMjAlM0QlMjAlNUIlNUQlM0IlMEElMDklMDklN0QlMEElMEElMDklMDlwb3N0SUQlMjAlM0QlMjAlMjclMjclMjAlMkIlMjBwb3N0SUQlM0IlMEElMEElMDklMDlpbmRleCUyMCUzRCUyMHN0b3JlLmluZGV4T2YlMjglMjBwb3N0SUQlMjAlMjklM0IlMEElMEElMDklMDlpZiUyMCUyOCUyMDAlMjAlM0UlMjBpbmRleCUyMCUyOSUyMCU3QiUwQSUwOSUwOSUwOXJldHVybiUyMHN0b3JlLmxlbmd0aCUzQiUwQSUwOSUwOSU3RCUyMGVsc2UlMjAlN0IlMEElMDklMDklMDlzdG9yZS5zcGxpY2UlMjglMjBpbmRleCUyQyUyMDElMjAlMjklM0IlMEElMDklMDklN0QlMEElMEElMDklMDl3aW5kb3cubG9jYWxTdG9yYWdlLnNldEl0ZW0lMjglMjAlMjdqZXRfZW5naW5lX3N0b3JlXyUyNyUyMCUyQiUyMHN0b3JlU2x1ZyUyQyUyMHN0b3JlLmpvaW4lMjglMjAlMjclMkMlMjclMjAlMjklMjAlMjklM0IlMEElMEElMDklMDlyZXR1cm4lMjBzdG9yZS5sZW5ndGglM0IlMEElMEElMDklMDklMEElMDklMDklMDklMDklN0QlMkMlMEElMDklMDklMDklMDlpblN0b3JlJTNBJTIwZnVuY3Rpb24lMjglMjBzdG9yZVNsdWclMkMlMjBwb3N0SUQlMjAlMjklMjAlN0IlMEElMDklMDklMDklMDklMDklMEElMDklMDl2YXIlMjBzdG9yZSUyMCUzRCUyMHdpbmRvdy5sb2NhbFN0b3JhZ2UuZ2V0SXRlbSUyOCUyMCUyN2pldF9lbmdpbmVfc3RvcmVfJTI3JTIwJTJCJTIwc3RvcmVTbHVnJTIwJTI5JTJDJTBBJTA5JTA5JTA5aW5kZXglM0IlMEElMEElMDklMDlwb3N0SUQlMjAlM0QlMjAlMjclMjclMjAlMkIlMjBwb3N0SUQlM0IlMEElMEElMDklMDlpZiUyMCUyOCUyMHN0b3JlJTIwJTI5JTIwJTdCJTBBJTA5JTA5JTA5c3RvcmUlMjAlM0QlMjBzdG9yZS5zcGxpdCUyOCUyMCUyNyUyQyUyNyUyMCUyOSUzQiUwQSUwOSUwOSU3RCUyMGVsc2UlMjAlN0IlMEElMDklMDklMDlzdG9yZSUyMCUzRCUyMCU1QiU1RCUzQiUwQSUwOSUwOSU3RCUwQSUwQSUwOSUwOWluZGV4JTIwJTNEJTIwc3RvcmUuaW5kZXhPZiUyOCUyMHBvc3RJRCUyMCUyOSUzQiUwQSUwQSUwOSUwOXJldHVybiUyMCUyOCUyMDAlMjAlM0MlM0QlMjBpbmRleCUyMCUyOSUzQiUwQSUwQSUwOSUwOSUwQSUwOSUwOSUwOSUwOSU3RCUyQyUwQSUwOSUwOSUwOSUwOWdldFN0b3JlJTNBJTIwZnVuY3Rpb24lMjglMjBzdG9yZVNsdWclMjAlMjklMjAlN0IlMEElMDklMDklMDklMDklMDklMEElMDklMDl2YXIlMjBzdG9yZSUyMCUzRCUyMHdpbmRvdy5sb2NhbFN0b3JhZ2UuZ2V0SXRlbSUyOCUyMCUyN2pldF9lbmdpbmVfc3RvcmVfJTI3JTIwJTJCJTIwc3RvcmVTbHVnJTIwJTI5JTJDJTBBJTA5JTA5JTA5aW5kZXglM0IlMEElMEElMDklMDlpZiUyMCUyOCUyMHN0b3JlJTIwJTI5JTIwJTdCJTBBJTA5JTA5JTA5c3RvcmUlMjAlM0QlMjBzdG9yZS5zcGxpdCUyOCUyMCUyNyUyQyUyNyUyMCUyOSUzQiUwQSUwOSUwOSU3RCUyMGVsc2UlMjAlN0IlMEElMDklMDklMDlzdG9yZSUyMCUzRCUyMCU1QiU1RCUzQiUwQSUwOSUwOSU3RCUwQSUwQSUwOSUwOXJldHVybiUyMHN0b3JlJTNCJTBBJTBBJTA5JTA5JTBBJTA5JTA5JTA5JTA5JTdEJTJDJTBBJTA5JTA5JTA5JTdEJTNCJTBB",
+          id: "jet-engine-frontend-js-before",
+          uid: "two_64f85683b78a4",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/jet-engine\/assets\/js\/frontend.js?ver=3.0.6.1",
+          id: "jet-engine-frontend-js",
+          uid: "two_64f85683b78f1",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/dynamic-content-for-elementor\/assets\/js\/fix-background-loop.min.js?ver=2.10.4",
+          id: "dce-fix-background-loop-js",
+          uid: "two_64f85683b7914",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/dynamic-content-for-elementor\/assets\/js\/settings.min.js?ver=2.10.4",
+          id: "dce-settings-js",
+          uid: "two_64f85683b7935",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/dynamic-content-for-elementor\/assets\/js\/visibility.min.js?ver=2.10.4",
+          id: "dce-visibility-js",
+          uid: "two_64f85683b7955",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor-pro\/assets\/js\/webpack-pro.runtime.min.js?ver=3.8.2",
+          id: "elementor-pro-webpack-runtime-js",
+          uid: "two_64f85683b7976",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor\/assets\/js\/webpack.runtime.min.js?ver=3.15.1",
+          id: "elementor-webpack-runtime-js",
+          uid: "two_64f85683b7998",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor\/assets\/js\/frontend-modules.min.js?ver=3.15.1",
+          id: "elementor-frontend-modules-js",
+          uid: "two_64f85683b79b9",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/dist\/vendor\/regenerator-runtime.min.js?ver=0.13.9",
+          id: "regenerator-runtime-js",
+          uid: "two_64f85683b79dd",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/dist\/vendor\/wp-polyfill.min.js?ver=3.15.0",
+          id: "wp-polyfill-js",
+          uid: "two_64f85683b7a06",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/dist\/hooks.min.js?ver=4169d3cf8e8d95a3d6d5",
+          id: "wp-hooks-js",
+          uid: "two_64f85683b7a2c",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/dist\/i18n.min.js?ver=9e794f35a71bb98672ae",
+          id: "wp-i18n-js",
+          uid: "two_64f85683b7a4f",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTBBd3AuaTE4bi5zZXRMb2NhbGVEYXRhJTI4JTIwJTdCJTIwJTI3dGV4dCUyMGRpcmVjdGlvbiU1Q3UwMDA0bHRyJTI3JTNBJTIwJTVCJTIwJTI3bHRyJTI3JTIwJTVEJTIwJTdEJTIwJTI5JTNCJTBB",
+          id: "wp-i18n-js-after",
+          uid: "two_64f85683b7a72",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTBBdmFyJTIwRWxlbWVudG9yUHJvRnJvbnRlbmRDb25maWclMjAlM0QlMjAlN0IlMjJhamF4dXJsJTIyJTNBJTIyaHR0cHMlM0ElNUMlMkYlNUMlMkZwcm9wZXJ0eWluZ3VydWdyYW0uaW4lNUMlMkZ3cC1hZG1pbiU1QyUyRmFkbWluLWFqYXgucGhwJTIyJTJDJTIybm9uY2UlMjIlM0ElMjJlNWQ1MzAwMTc4JTIyJTJDJTIydXJscyUyMiUzQSU3QiUyMmFzc2V0cyUyMiUzQSUyMmh0dHBzJTNBJTVDJTJGJTVDJTJGcHJvcGVydHlpbmd1cnVncmFtLmluJTVDJTJGd3AtY29udGVudCU1QyUyRnBsdWdpbnMlNUMlMkZlbGVtZW50b3ItcHJvJTVDJTJGYXNzZXRzJTVDJTJGJTIyJTJDJTIycmVzdCUyMiUzQSUyMmh0dHBzJTNBJTVDJTJGJTVDJTJGcHJvcGVydHlpbmd1cnVncmFtLmluJTVDJTJGd3AtanNvbiU1QyUyRiUyMiU3RCUyQyUyMnNoYXJlQnV0dG9uc05ldHdvcmtzJTIyJTNBJTdCJTIyZmFjZWJvb2slMjIlM0ElN0IlMjJ0aXRsZSUyMiUzQSUyMkZhY2Vib29rJTIyJTJDJTIyaGFzX2NvdW50ZXIlMjIlM0F0cnVlJTdEJTJDJTIydHdpdHRlciUyMiUzQSU3QiUyMnRpdGxlJTIyJTNBJTIyVHdpdHRlciUyMiU3RCUyQyUyMmxpbmtlZGluJTIyJTNBJTdCJTIydGl0bGUlMjIlM0ElMjJMaW5rZWRJbiUyMiUyQyUyMmhhc19jb3VudGVyJTIyJTNBdHJ1ZSU3RCUyQyUyMnBpbnRlcmVzdCUyMiUzQSU3QiUyMnRpdGxlJTIyJTNBJTIyUGludGVyZXN0JTIyJTJDJTIyaGFzX2NvdW50ZXIlMjIlM0F0cnVlJTdEJTJDJTIycmVkZGl0JTIyJTNBJTdCJTIydGl0bGUlMjIlM0ElMjJSZWRkaXQlMjIlMkMlMjJoYXNfY291bnRlciUyMiUzQXRydWUlN0QlMkMlMjJ2ayUyMiUzQSU3QiUyMnRpdGxlJTIyJTNBJTIyVkslMjIlMkMlMjJoYXNfY291bnRlciUyMiUzQXRydWUlN0QlMkMlMjJvZG5va2xhc3NuaWtpJTIyJTNBJTdCJTIydGl0bGUlMjIlM0ElMjJPSyUyMiUyQyUyMmhhc19jb3VudGVyJTIyJTNBdHJ1ZSU3RCUyQyUyMnR1bWJsciUyMiUzQSU3QiUyMnRpdGxlJTIyJTNBJTIyVHVtYmxyJTIyJTdEJTJDJTIyZGlnZyUyMiUzQSU3QiUyMnRpdGxlJTIyJTNBJTIyRGlnZyUyMiU3RCUyQyUyMnNreXBlJTIyJTNBJTdCJTIydGl0bGUlMjIlM0ElMjJTa3lwZSUyMiU3RCUyQyUyMnN0dW1ibGV1cG9uJTIyJTNBJTdCJTIydGl0bGUlMjIlM0ElMjJTdHVtYmxlVXBvbiUyMiUyQyUyMmhhc19jb3VudGVyJTIyJTNBdHJ1ZSU3RCUyQyUyMm1peCUyMiUzQSU3QiUyMnRpdGxlJTIyJTNBJTIyTWl4JTIyJTdEJTJDJTIydGVsZWdyYW0lMjIlM0ElN0IlMjJ0aXRsZSUyMiUzQSUyMlRlbGVncmFtJTIyJTdEJTJDJTIycG9ja2V0JTIyJTNBJTdCJTIydGl0bGUlMjIlM0ElMjJQb2NrZXQlMjIlMkMlMjJoYXNfY291bnRlciUyMiUzQXRydWUlN0QlMkMlMjJ4aW5nJTIyJTNBJTdCJTIydGl0bGUlMjIlM0ElMjJYSU5HJTIyJTJDJTIyaGFzX2NvdW50ZXIlMjIlM0F0cnVlJTdEJTJDJTIyd2hhdHNhcHAlMjIlM0ElN0IlMjJ0aXRsZSUyMiUzQSUyMldoYXRzQXBwJTIyJTdEJTJDJTIyZW1haWwlMjIlM0ElN0IlMjJ0aXRsZSUyMiUzQSUyMkVtYWlsJTIyJTdEJTJDJTIycHJpbnQlMjIlM0ElN0IlMjJ0aXRsZSUyMiUzQSUyMlByaW50JTIyJTdEJTdEJTJDJTIyZmFjZWJvb2tfc2RrJTIyJTNBJTdCJTIybGFuZyUyMiUzQSUyMmVuX1VTJTIyJTJDJTIyYXBwX2lkJTIyJTNBJTIyJTIyJTdEJTJDJTIybG90dGllJTIyJTNBJTdCJTIyZGVmYXVsdEFuaW1hdGlvblVybCUyMiUzQSUyMmh0dHBzJTNBJTVDJTJGJTVDJTJGcHJvcGVydHlpbmd1cnVncmFtLmluJTVDJTJGd3AtY29udGVudCU1QyUyRnBsdWdpbnMlNUMlMkZlbGVtZW50b3ItcHJvJTVDJTJGbW9kdWxlcyU1QyUyRmxvdHRpZSU1QyUyRmFzc2V0cyU1QyUyRmFuaW1hdGlvbnMlNUMlMkZkZWZhdWx0Lmpzb24lMjIlN0QlN0QlM0IlMEE=",
+          id: "elementor-pro-frontend-js-before",
+          uid: "two_64f85683b7a98",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor-pro\/assets\/js\/frontend.min.js?ver=3.8.2",
+          id: "elementor-pro-frontend-js",
+          uid: "two_64f85683b7add",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor\/assets\/lib\/waypoints\/waypoints.min.js?ver=4.0.2",
+          id: "elementor-waypoints-js",
+          uid: "two_64f85683b7b03",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-includes\/js\/jquery\/ui\/core.min.js?ver=1.13.2",
+          id: "jquery-ui-core-js",
+          uid: "two_64f85683b7b26",
+          excluded_from_delay: false,
+        },
+        {
+          inline: true,
+          code: "JTBBdmFyJTIwZWxlbWVudG9yRnJvbnRlbmRDb25maWclMjAlM0QlMjAlN0IlMjJlbnZpcm9ubWVudE1vZGUlMjIlM0ElN0IlMjJlZGl0JTIyJTNBZmFsc2UlMkMlMjJ3cFByZXZpZXclMjIlM0FmYWxzZSUyQyUyMmlzU2NyaXB0RGVidWclMjIlM0FmYWxzZSU3RCUyQyUyMmkxOG4lMjIlM0ElN0IlMjJzaGFyZU9uRmFjZWJvb2slMjIlM0ElMjJTaGFyZSUyMG9uJTIwRmFjZWJvb2slMjIlMkMlMjJzaGFyZU9uVHdpdHRlciUyMiUzQSUyMlNoYXJlJTIwb24lMjBUd2l0dGVyJTIyJTJDJTIycGluSXQlMjIlM0ElMjJQaW4lMjBpdCUyMiUyQyUyMmRvd25sb2FkJTIyJTNBJTIyRG93bmxvYWQlMjIlMkMlMjJkb3dubG9hZEltYWdlJTIyJTNBJTIyRG93bmxvYWQlMjBpbWFnZSUyMiUyQyUyMmZ1bGxzY3JlZW4lMjIlM0ElMjJGdWxsc2NyZWVuJTIyJTJDJTIyem9vbSUyMiUzQSUyMlpvb20lMjIlMkMlMjJzaGFyZSUyMiUzQSUyMlNoYXJlJTIyJTJDJTIycGxheVZpZGVvJTIyJTNBJTIyUGxheSUyMFZpZGVvJTIyJTJDJTIycHJldmlvdXMlMjIlM0ElMjJQcmV2aW91cyUyMiUyQyUyMm5leHQlMjIlM0ElMjJOZXh0JTIyJTJDJTIyY2xvc2UlMjIlM0ElMjJDbG9zZSUyMiUyQyUyMmExMXlDYXJvdXNlbFdyYXBwZXJBcmlhTGFiZWwlMjIlM0ElMjJDYXJvdXNlbCUyMCU3QyUyMEhvcml6b250YWwlMjBzY3JvbGxpbmclM0ElMjBBcnJvdyUyMExlZnQlMjAlMjYlMjBSaWdodCUyMiUyQyUyMmExMXlDYXJvdXNlbFByZXZTbGlkZU1lc3NhZ2UlMjIlM0ElMjJQcmV2aW91cyUyMHNsaWRlJTIyJTJDJTIyYTExeUNhcm91c2VsTmV4dFNsaWRlTWVzc2FnZSUyMiUzQSUyMk5leHQlMjBzbGlkZSUyMiUyQyUyMmExMXlDYXJvdXNlbEZpcnN0U2xpZGVNZXNzYWdlJTIyJTNBJTIyVGhpcyUyMGlzJTIwdGhlJTIwZmlyc3QlMjBzbGlkZSUyMiUyQyUyMmExMXlDYXJvdXNlbExhc3RTbGlkZU1lc3NhZ2UlMjIlM0ElMjJUaGlzJTIwaXMlMjB0aGUlMjBsYXN0JTIwc2xpZGUlMjIlMkMlMjJhMTF5Q2Fyb3VzZWxQYWdpbmF0aW9uQnVsbGV0TWVzc2FnZSUyMiUzQSUyMkdvJTIwdG8lMjBzbGlkZSUyMiU3RCUyQyUyMmlzX3J0bCUyMiUzQWZhbHNlJTJDJTIyYnJlYWtwb2ludHMlMjIlM0ElN0IlMjJ4cyUyMiUzQTAlMkMlMjJzbSUyMiUzQTQ4MCUyQyUyMm1kJTIyJTNBNzY4JTJDJTIybGclMjIlM0ExMDI1JTJDJTIyeGwlMjIlM0ExNDQwJTJDJTIyeHhsJTIyJTNBMTYwMCU3RCUyQyUyMnJlc3BvbnNpdmUlMjIlM0ElN0IlMjJicmVha3BvaW50cyUyMiUzQSU3QiUyMm1vYmlsZSUyMiUzQSU3QiUyMmxhYmVsJTIyJTNBJTIyTW9iaWxlJTIwUG9ydHJhaXQlMjIlMkMlMjJ2YWx1ZSUyMiUzQTc2NyUyQyUyMmRlZmF1bHRfdmFsdWUlMjIlM0E3NjclMkMlMjJkaXJlY3Rpb24lMjIlM0ElMjJtYXglMjIlMkMlMjJpc19lbmFibGVkJTIyJTNBdHJ1ZSU3RCUyQyUyMm1vYmlsZV9leHRyYSUyMiUzQSU3QiUyMmxhYmVsJTIyJTNBJTIyTW9iaWxlJTIwTGFuZHNjYXBlJTIyJTJDJTIydmFsdWUlMjIlM0E4ODAlMkMlMjJkZWZhdWx0X3ZhbHVlJTIyJTNBODgwJTJDJTIyZGlyZWN0aW9uJTIyJTNBJTIybWF4JTIyJTJDJTIyaXNfZW5hYmxlZCUyMiUzQWZhbHNlJTdEJTJDJTIydGFibGV0JTIyJTNBJTdCJTIybGFiZWwlMjIlM0ElMjJUYWJsZXQlMjBQb3J0cmFpdCUyMiUyQyUyMnZhbHVlJTIyJTNBMTAyNCUyQyUyMmRlZmF1bHRfdmFsdWUlMjIlM0ExMDI0JTJDJTIyZGlyZWN0aW9uJTIyJTNBJTIybWF4JTIyJTJDJTIyaXNfZW5hYmxlZCUyMiUzQXRydWUlN0QlMkMlMjJ0YWJsZXRfZXh0cmElMjIlM0ElN0IlMjJsYWJlbCUyMiUzQSUyMlRhYmxldCUyMExhbmRzY2FwZSUyMiUyQyUyMnZhbHVlJTIyJTNBMTIwMCUyQyUyMmRlZmF1bHRfdmFsdWUlMjIlM0ExMjAwJTJDJTIyZGlyZWN0aW9uJTIyJTNBJTIybWF4JTIyJTJDJTIyaXNfZW5hYmxlZCUyMiUzQWZhbHNlJTdEJTJDJTIybGFwdG9wJTIyJTNBJTdCJTIybGFiZWwlMjIlM0ElMjJMYXB0b3AlMjIlMkMlMjJ2YWx1ZSUyMiUzQTEzNjYlMkMlMjJkZWZhdWx0X3ZhbHVlJTIyJTNBMTM2NiUyQyUyMmRpcmVjdGlvbiUyMiUzQSUyMm1heCUyMiUyQyUyMmlzX2VuYWJsZWQlMjIlM0FmYWxzZSU3RCUyQyUyMndpZGVzY3JlZW4lMjIlM0ElN0IlMjJsYWJlbCUyMiUzQSUyMldpZGVzY3JlZW4lMjIlMkMlMjJ2YWx1ZSUyMiUzQTI0MDAlMkMlMjJkZWZhdWx0X3ZhbHVlJTIyJTNBMjQwMCUyQyUyMmRpcmVjdGlvbiUyMiUzQSUyMm1pbiUyMiUyQyUyMmlzX2VuYWJsZWQlMjIlM0FmYWxzZSU3RCU3RCU3RCUyQyUyMnZlcnNpb24lMjIlM0ElMjIzLjE1LjElMjIlMkMlMjJpc19zdGF0aWMlMjIlM0FmYWxzZSUyQyUyMmV4cGVyaW1lbnRhbEZlYXR1cmVzJTIyJTNBJTdCJTIyZV9kb21fb3B0aW1pemF0aW9uJTIyJTNBdHJ1ZSUyQyUyMmVfb3B0aW1pemVkX2Fzc2V0c19sb2FkaW5nJTIyJTNBdHJ1ZSUyQyUyMmFkZGl0aW9uYWxfY3VzdG9tX2JyZWFrcG9pbnRzJTIyJTNBdHJ1ZSUyQyUyMnRoZW1lX2J1aWxkZXJfdjIlMjIlM0F0cnVlJTJDJTIybGFuZGluZy1wYWdlcyUyMiUzQXRydWUlMkMlMjJwYWdlLXRyYW5zaXRpb25zJTIyJTNBdHJ1ZSUyQyUyMm5vdGVzJTIyJTNBdHJ1ZSUyQyUyMmZvcm0tc3VibWlzc2lvbnMlMjIlM0F0cnVlJTJDJTIyZV9zY3JvbGxfc25hcCUyMiUzQXRydWUlN0QlMkMlMjJ1cmxzJTIyJTNBJTdCJTIyYXNzZXRzJTIyJTNBJTIyaHR0cHMlM0ElNUMlMkYlNUMlMkZwcm9wZXJ0eWluZ3VydWdyYW0uaW4lNUMlMkZ3cC1jb250ZW50JTVDJTJGcGx1Z2lucyU1QyUyRmVsZW1lbnRvciU1QyUyRmFzc2V0cyU1QyUyRiUyMiU3RCUyQyUyMnN3aXBlckNsYXNzJTIyJTNBJTIyc3dpcGVyLWNvbnRhaW5lciUyMiUyQyUyMnNldHRpbmdzJTIyJTNBJTdCJTIycGFnZSUyMiUzQSU1QiU1RCUyQyUyMmVkaXRvclByZWZlcmVuY2VzJTIyJTNBJTVCJTVEJTJDJTIyZHluYW1pY29vbyUyMiUzQSU1QiU1RCU3RCUyQyUyMmtpdCUyMiUzQSU3QiUyMmFjdGl2ZV9icmVha3BvaW50cyUyMiUzQSU1QiUyMnZpZXdwb3J0X21vYmlsZSUyMiUyQyUyMnZpZXdwb3J0X3RhYmxldCUyMiU1RCUyQyUyMmdsb2JhbF9pbWFnZV9saWdodGJveCUyMiUzQSUyMnllcyUyMiUyQyUyMmxpZ2h0Ym94X2VuYWJsZV9jb3VudGVyJTIyJTNBJTIyeWVzJTIyJTJDJTIybGlnaHRib3hfZW5hYmxlX2Z1bGxzY3JlZW4lMjIlM0ElMjJ5ZXMlMjIlMkMlMjJsaWdodGJveF9lbmFibGVfem9vbSUyMiUzQSUyMnllcyUyMiUyQyUyMmxpZ2h0Ym94X2VuYWJsZV9zaGFyZSUyMiUzQSUyMnllcyUyMiUyQyUyMmxpZ2h0Ym94X3RpdGxlX3NyYyUyMiUzQSUyMnRpdGxlJTIyJTJDJTIybGlnaHRib3hfZGVzY3JpcHRpb25fc3JjJTIyJTNBJTIyZGVzY3JpcHRpb24lMjIlN0QlMkMlMjJwb3N0JTIyJTNBJTdCJTIyaWQlMjIlM0ExMTczMCUyQyUyMnRpdGxlJTIyJTNBJTIyQ2VudHJhbCUyNTIwUGFyayUyNTIwU2VjdG9yJTI1MjAxMDQlMjUyMEd1cmdhb24lMjUyMCUyNTdDJTI1MjBDZW50cmFsJTI1MjBQYXJrJTI1MjBEd2Fya2ElMjUyMEV4cHJlc3N3YXklMjUyMEd1cnVncmFtJTIyJTJDJTIyZXhjZXJwdCUyMiUzQSUyMiUyMiUyQyUyMmZlYXR1cmVkSW1hZ2UlMjIlM0ElMjJodHRwcyUzQSU1QyUyRiU1QyUyRnByb3BlcnR5aW5ndXJ1Z3JhbS5pbiU1QyUyRndwLWNvbnRlbnQlNUMlMkZ1cGxvYWRzJTVDJTJGMjAyMyU1QyUyRjA4JTVDJTJGQ2VudHJhbC1QYXJrLVNlY3Rvci0xMDQtR3VyZ2Fvbi0xMDI0eDM3OC5qcGclMjIlN0QlN0QlM0IlMEE=",
+          id: "elementor-frontend-js-before",
+          uid: "two_64f85683b7b49",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor\/assets\/js\/frontend.min.js?ver=3.15.1",
+          id: "elementor-frontend-js",
+          uid: "two_64f85683b7ba5",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor-pro\/assets\/js\/elements-handlers.min.js?ver=3.8.2",
+          id: "pro-elements-handlers-js",
+          uid: "two_64f85683b7bca",
+          excluded_from_delay: false,
+        },
+        {
+          inline: false,
+          url: "https:\/\/propertyingurugram.in\/wp-content\/plugins\/elementor-pro\/assets\/lib\/sticky\/jquery.sticky.min.js?ver=3.8.2",
+          id: "e-sticky-js",
+          uid: "two_64f85683b7bf6",
+          excluded_from_delay: false,
+        },
+        {
+          code: "CgogICAgICAgICAgICAgICAgaWYgKHdpbmRvdy50d29fcGFnZV9sb2FkZWQpIHsKICAgICAgICAgICAgICAgICAgICBjb25zb2xlLmxvZygiZGlzcGF0Y2hpbmcgZXZlbnRzIik7Y29uc29sZS5sb2coIkRpc3BhdGNoaW5nIERPTUNvbnRlbnRMb2FkZWQgZXZlbnQiKTtkb2N1bWVudC5kaXNwYXRjaEV2ZW50KG5ldyBFdmVudCgiRE9NQ29udGVudExvYWRlZCIpKTtjb25zb2xlLmxvZygiRGlzcGF0Y2hpbmcgTG9hZCBldmVudCIpO3dpbmRvdy5kaXNwYXRjaEV2ZW50KG5ldyBFdmVudCgibG9hZCIpKTtjb25zb2xlLmxvZygiRGlzcGF0Y2hpbmcgQ2xpY2tPclRvdWNoIGV2ZW50Iik7dHdvX2xvYWRpbmdfZXZlbnRzKHR3b19ldmVudCk7fQogICAgICAgICAgICAgICAg",
+          inline: true,
+          uid: "two_dispatchEvent_script",
+        },
+      ],
+    };
+  </script>
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    var two_worker_data_css = {
+      css: [
+        {
+          url: "https:\/\/fonts.googleapis.com\/css?family=Poppins%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CMontserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CAlata%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CJosefin+Sans%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&display=swap#038;display=auto&#038;ver=6.1.3",
+          media: "all",
+          uid: "",
+        },
+        {
+          url: "https:\/\/propertyingurugram.in\/wp-content\/cache\/tw_optimize\/css\/two_11730_aggregated_5031697833a1b266bf9fe4d7a52cf38e_delay.min.css?date=1693996675",
+          media: "all",
+          uid: "",
+        },
+      ],
+    };
+  </script>
+  <noscript>
+    <link rel="stylesheet" crossorigin="anonymous" class="two_uncritical_css_noscript" media="all"
+      href="https://fonts.googleapis.com/css?family=Poppins%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CMontserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CAlata%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CJosefin+Sans%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&display=swap#038;display=auto&#038;ver=6.1.3" />
+  </noscript>
+  <noscript>
+    <link rel="stylesheet" crossorigin="anonymous" class="two_uncritical_css_noscript" media="all"
+      href="https://propertyingurugram.in/wp-content/cache/tw_optimize/css/two_11730_aggregated_5031697833a1b266bf9fe4d7a52cf38e_delay.min.css?date=1693996675" />
+  </noscript>
+  <link type="text/css" media="all"
+    href="https://propertyingurugram.in/wp-content/cache/tw_optimize/css/two_11730_aggregated.min.css?date=1693996675"
+    rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google-site-verification" content="lv6fCfSNiue0Fl1Fm-Et1Irv7A8g_ZM0S0GfPyN-CtA" />
+  <link rel="profile" href="https://gmpg.org/xfn/11" />
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    window.addEventListener("load", function () {
+      window.two_page_loaded = true;
+    });
+
+    function logLoaded() {
+      console.log("window is loaded");
+    }
+    (function listen() {
+      if (window.two_page_loaded) {
+        logLoaded();
+      } else {
+        console.log("window is notLoaded");
+        window.setTimeout(listen, 50);
+      }
+    })();
+
+    function applyElementorControllers() {
+      if (!window.elementorFrontend) return;
+      window.elementorFrontend.init();
+    }
+
+    function applyViewCss(cssUrl) {
+      if (!cssUrl) return;
+      const cssNode = document.createElement("link");
+      cssNode.setAttribute("href", cssUrl);
+      cssNode.setAttribute("rel", "stylesheet");
+      cssNode.setAttribute("type", "text/css");
+      document.head.appendChild(cssNode);
+    }
+    var two_scripts_load = true;
+    var two_load_delayed_javascript = function (event) {
+      if (two_scripts_load) {
+        two_scripts_load = false;
+        two_connect_script(0);
+        if (typeof two_delay_custom_js_new == "object") {
+          document.dispatchEvent(two_delay_custom_js_new);
+        }
+        window.two_delayed_loading_events.forEach(function (event) {
+          console.log("removed event listener");
+          document.removeEventListener(
+            event,
+            two_load_delayed_javascript,
+            false
+          );
+        });
+      }
+    };
+
+    function two_loading_events(event) {
+      setTimeout(
+        (function (event) {
+          return function () {
+            var t = function (eventType, elementClientX, elementClientY) {
+              var _event = new Event(eventType, {
+                bubbles: true,
+                cancelable: true,
+              });
+              if (eventType === "click") {
+                _event.clientX = elementClientX;
+                _event.clientY = elementClientY;
+              } else {
+                _event.touches = [
+                  {
+                    clientX: elementClientX,
+                    clientY: elementClientY,
+                  },
+                ];
+              }
+              return _event;
+            };
+            var element;
+            if (event && event.type === "touchend") {
+              var touch = event.changedTouches[0];
+              element = document.elementFromPoint(
+                touch.clientX,
+                touch.clientY
+              );
+              element.dispatchEvent(
+                t("touchstart", touch.clientX, touch.clientY)
+              );
+              element.dispatchEvent(
+                t("touchend", touch.clientX, touch.clientY)
+              );
+              element.dispatchEvent(t("click", touch.clientX, touch.clientY));
+            } else if (event && event.type === "click") {
+              element = document.elementFromPoint(
+                event.clientX,
+                event.clientY
+              );
+              element.dispatchEvent(
+                t(event.type, event.clientX, event.clientY)
+              );
+            }
+          };
+        })(event),
+        150
+      );
+    }
+  </script>
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    window.two_delayed_loading_attribute = "data-twodelayedjs";
+    window.two_delayed_js_load_libs_first = "";
+    window.two_delayed_loading_events = [
+      "mousemove",
+      "click",
+      "keydown",
+      "wheel",
+      "touchmove",
+      "touchend",
+    ];
+    window.two_event_listeners = [];
+  </script>
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    document.onreadystatechange = function () {
+      if (document.readyState === "interactive") {
+        if (window.two_delayed_loading_attribute !== undefined) {
+          window.two_delayed_loading_events.forEach(function (ev) {
+            window.two_event_listeners[ev] = document.addEventListener(
+              ev,
+              two_load_delayed_javascript,
+              {
+                passive: false,
+              }
+            );
+          });
+        }
+        if (window.two_delayed_loading_attribute_css !== undefined) {
+          window.two_delayed_loading_events_css.forEach(function (ev) {
+            window.two_event_listeners_css[ev] = document.addEventListener(
+              ev,
+              two_load_delayed_css,
+              {
+                passive: false,
+              }
+            );
+          });
+        }
+        if (window.two_load_delayed_iframe !== undefined) {
+          window.two_delayed_loading_iframe_events.forEach(function (ev) {
+            window.two_iframe_event_listeners[ev] = document.addEventListener(
+              ev,
+              two_load_delayed_iframe,
+              {
+                passive: false,
+              }
+            );
+          });
+        }
+      }
+    };
+  </script>
+  <!-- Search Engine Optimization by Rank Math PRO - https://rankmath.com/ -->
+  <title>
+    Central Park Sector 104 Gurgaon | Maison Infratech
+  </title>
+  <meta name="description"
+    content="Central Park Sector 104 Gurgaon is a newly launched ultra luxury residential property on Dwarka Expressway. It has 3 BHK, 4 BHK, 5 BHK apartments." />
+  <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="article" />
+
+  <meta property="og:image:secure_url"
+    content="https://propertyingurugram.in/wp-content/uploads/2023/08/Central-Park-Sector-104-Gurgaon.jpg" />
+  <meta property="og:image:width" content="1600" />
+  <meta property="og:image:height" content="590" />
+  <meta property="og:image:alt" content="Central Park Sector 104 Gurgaon" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+
+  </script>
+  <!-- /Rank Math WordPress SEO plugin -->
+
+    
+
+</head>
+
+<body
+  class="residential-template-default single single-residential postid-11730 wp-custom-logo elementor-default elementor-kit-9 elementor-page-84">
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript"></script>
+  <script data-pagespeed-no-defer data-two-no-delay id="two_worker" type="javascript/worker">
+      let two_font_actions = ""; let two_css_length=0;let two_connected_css_length=0;let two_uncritical_fonts=null;let two_uncritical_fonts_status=false;if(two_font_actions=="not_load"||two_font_actions=="exclude_uncritical_fonts"){two_uncritical_fonts_status=true;}
+      self.addEventListener("message",function(e){two_css_length=e.data.css.length;if(!e.data.critical_data.critical_css||!e.data.critical_data.critical_fonts){two_uncritical_fonts_status=false;} if(e.data.font.length>0){two_fetch_inbg(e.data.font,"font");}
+      if(e.data.js.length>0){two_fetch_inbg(e.data.js,"js");} if(e.data.excluded_js.length>0){two_fetch_inbg(e.data.excluded_js,"js",true);} if(e.data.css.length>0){two_fetch_inbg(e.data.css,"css");}},false);function two_fetch_inbg(data,type,excluded_js=false){for(let
+      i in data){if(typeof data[i].url!="undefined"){fetch(data[i].url,{mode:'no-cors',redirect:'follow'}).then((r)=>{if(!r.ok||r.status!==200){throw Error(r.statusText);} if(two_uncritical_fonts_status&&type=="css"){return(r.text());}else{return(r.blob());}}).then((content_)=>{let
+      sheetURL="";if(two_uncritical_fonts_status&&type=="css"){sheetURL=two_create_blob(content_);}else{sheetURL=URL.createObjectURL(content_);} var modifiedScript=null;if(type=="css"){modifiedScript={id:i,type:type,status:'ok',media:data[i].media,url:sheetURL,uid:data[i].uid,original_url:data[i].url,two_uncritical_fonts:two_uncritical_fonts,};}else
+      if(type=="js"){modifiedScript={id:i,status:'ok',type:type,url:sheetURL,uid:data[i].uid};}else if(type=="font"){modifiedScript={status:'ok',type:type,main_url:data[i].url,url:sheetURL,font_face:data[i].font_face};} if(excluded_js){modifiedScript.excluded_from_delay=true;}
+      two_send_worker_data(modifiedScript);}).catch(function(error){console.log("error in fetching: "+error.toString()+", bypassing "+data[i].url);fetch(data[i].url,{redirect:'follow'}).then((r)=>{if(!r.ok||r.status!==200){throw Error(r.statusText);}
+      if(two_uncritical_fonts_status&&type=="css"){return(r.text());}else{return(r.blob());}}).then((content_)=>{let sheetURL="";if(two_uncritical_fonts_status&&type=="css"){sheetURL=two_create_blob(content_);}else{sheetURL=URL.createObjectURL(content_);}
+      var modifiedScript=null;if(type=="css"){modifiedScript={id:i,type:type,status:'ok',media:data[i].media,url:sheetURL,uid:data[i].uid,original_url:data[i].url,two_uncritical_fonts:two_uncritical_fonts,};}else if(type=="js"){modifiedScript={id:i,status:'ok',type:type,url:sheetURL,uid:data[i].uid};}else
+      if(type=="font"){modifiedScript={status:'ok',type:type,main_url:data[i].url,url:sheetURL,font_face:data[i].font_face};} if(excluded_js){modifiedScript.excluded_from_delay=true;} two_send_worker_data(modifiedScript);}).catch(function(error){console.log("error
+      in fetching no-cors: "+error.toString()+", bypassing "+data[i].url);try{console.log("error in fetching: "+error.toString()+", sending XMLHttpRequest"+data[i].url);let r=new XMLHttpRequest;if(two_uncritical_fonts_status&&type=="css"){r.responseType="text";}else{r.responseType="blob";}
+      r.onload=function(content_){let sheetURL="";if(two_uncritical_fonts_status&&type=="css"){sheetURL=two_create_blob(content_.target.response);}else{sheetURL=URL.createObjectURL(content_.target.response);} if(r.status!==200){two_XMLHttpRequest_error(excluded_js,data[i],type,i);return;}
+      console.log("error in fetching: "+error.toString()+", XMLHttpRequest success "+data[i].url);let modifiedScript=null;if(type=="css"){modifiedScript={id:i,type:type,status:'ok',media:data[i].media,url:sheetURL,uid:data[i].uid,two_uncritical_fonts:two_uncritical_fonts,};}else
+      if(type=="js"){modifiedScript={id:i,type:type,status:'ok',url:sheetURL,uid:data[i].uid};}else if(type=="font"){modifiedScript={type:type,status:'ok',main_url:data[i].url,url:sheetURL,font_face:data[i].font_face};} if(excluded_js){modifiedScript.excluded_from_delay=true;}
+      two_send_worker_data(modifiedScript);};r.onerror=function(){two_XMLHttpRequest_error(excluded_js,data[i],type,i)};r.open("GET",data[i].url,true);r.send();}catch(e){console.log("error in fetching: "+e.toString()+", running fallback for "+data[i].url);var
+      modifiedScript=null;if(type=="css"||type=="js"){modifiedScript={id:i,type:type,status:'error',url:data[i].url,uid:data[i].uid};}else if(type=="font"){modifiedScript={type:type,status:'error',url:data[i].url,font_face:data[i].font_face};} if(excluded_js){modifiedScript.excluded_from_delay=true;}
+      two_send_worker_data(modifiedScript);}});});}}} function two_XMLHttpRequest_error(excluded_js,data_i,type,i){console.log("error in fetching: XMLHttpRequest failed "+data_i.url);var modifiedScript=null;if(type=="css"||type=="js"){modifiedScript={id:i,type:type,status:'error',url:data_i.url,uid:data_i.uid};}else
+      if(type=="font"){modifiedScript={type:type,status:'error',url:data_i.url,font_face:data_i.font_face};} if(excluded_js){modifiedScript.excluded_from_delay=true;} two_send_worker_data(modifiedScript);} function two_create_blob(str){two_uncritical_fonts="";const
+      regex=/@font-face\s*\{(?:[^{}])*\}/sig;str=str.replace(regex,function(e){if(e.includes("data:application")){return e;} two_uncritical_fonts+=e;return"";});let blob_data=new Blob([str],{type:"text/css"});let sheetURL=URL.createObjectURL(blob_data);return
+      sheetURL;} function two_send_worker_data(data){if(data.type=="css"){two_connected_css_length++;data.length=two_css_length;data.connected_length=two_connected_css_length;} self.postMessage(data)}
+    </script>
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript">
+    let two_font_actions = "";
+    two_worker_styles_list = [];
+    two_worker_styles_count = 0;
+    var two_script_list =
+      typeof two_worker_data_js === "undefined" ? [] : two_worker_data_js.js;
+    var two_excluded_js_list =
+      typeof two_worker_data_excluded_js === "undefined"
+        ? []
+        : two_worker_data_excluded_js.js;
+    var excluded_count = two_excluded_js_list.filter((el) => {
+      return !!el["url"];
+    }).length;
+    var two_css_list =
+      typeof two_worker_data_css === "undefined"
+        ? []
+        : two_worker_data_css.css;
+    var two_fonts_list =
+      typeof two_worker_data_font === "undefined"
+        ? []
+        : two_worker_data_font.font;
+    var two_critical_data =
+      typeof two_worker_data_critical_data === "undefined"
+        ? []
+        : two_worker_data_critical_data.critical_data;
+    var wcode = new Blob(
+      [document.querySelector("#two_worker").textContent],
+      {
+        type: "text/javascript",
+      }
+    );
+    var two_worker = new Worker(window.URL.createObjectURL(wcode));
+    var two_worker_data = {
+      js: two_script_list,
+      excluded_js: two_excluded_js_list,
+      css: two_css_list,
+      font: two_fonts_list,
+      critical_data: two_critical_data,
+    };
+    two_worker.postMessage(two_worker_data);
+    two_worker.addEventListener("message", function (e) {
+      var data = e.data;
+      if (data.type === "css" && data.status === "ok") {
+        if (
+          data.two_uncritical_fonts &&
+          two_font_actions == "exclude_uncritical_fonts"
+        ) {
+          let two_uncritical_fonts = data.two_uncritical_fonts;
+          const two_font_tag = document.createElement("style");
+          two_font_tag.innerHTML = two_uncritical_fonts;
+          two_font_tag.className = "two_uncritical_fonts";
+          document.body.appendChild(two_font_tag);
+        }
+        if (window.two_page_loaded) {
+          two_connect_style(data);
+        } else {
+          two_worker_styles_list.push(data);
+        }
+      } else if (data.type === "js") {
+        if (data.status === "ok") {
+          if (data.excluded_from_delay) {
+            two_excluded_js_list[data.id].old_url =
+              two_excluded_js_list[data.id].url;
+            two_excluded_js_list[data.id].url = data.url;
+            two_excluded_js_list[data.id].success = true;
+            excluded_count--;
+            if (excluded_count === 0) {
+              two_connect_script(0, two_excluded_js_list);
+            }
+          } else {
+            two_script_list[data.id].old_url = two_script_list[data.id].url;
+            two_script_list[data.id].url = data.url;
+            two_script_list[data.id].success = true;
+          }
+        }
+      } else if (data.type === "css" && data.status === "error") {
+        console.log("error in fetching, connecting style now");
+        two_connect_failed_style(data);
+      } else if (data.type === "font") {
+        two_connect_font(data);
+      }
+    });
+
+    function UpdateQueryString(key, value, url) {
+      if (!url) url = window.location.href;
+      var re = new RegExp("([?&])" + key + "=.*?(&|#|$)(.*)", "gi"),
+        hash;
+      if (re.test(url)) {
+        if (typeof value !== "undefined" && value !== null) {
+          return url.replace(re, "$1" + key + "=" + value + "$2$3");
+        } else {
+          hash = url.split("#");
+          url = hash[0].replace(re, "$1$3").replace(/(&|\?)$/, "");
+          if (typeof hash[1] !== "undefined" && hash[1] !== null) {
+            url += "#" + hash[1];
+          }
+          return url;
+        }
+      } else {
+        if (typeof value !== "undefined" && value !== null) {
+          var separator = url.indexOf("?") !== -1 ? "&" : "?";
+          hash = url.split("#");
+          url = hash[0] + separator + key + "=" + value;
+          if (typeof hash[1] !== "undefined" && hash[1] !== null) {
+            url += "#" + hash[1];
+          }
+          return url;
+        } else {
+          return url;
+        }
+      }
+    }
+
+    function two_connect_failed_style(data) {
+      var link = document.createElement("link");
+      link.className = "fallback_two_worker";
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = data.url;
+      link.media = "none";
+      link.onload = function () {
+        if (this.media === "none") {
+          if (data.media) {
+            this.media = data.media;
+          } else {
+            this.media = "all";
+          }
+          console.log(data.media);
+        }
+        if (
+          data.connected_length == data.length &&
+          typeof two_replace_backgrounds != "undefined"
+        ) {
+          two_replace_backgrounds();
+        }
+      };
+      document.getElementsByTagName("head")[0].appendChild(link);
+      if (
+        data.connected_length == data.length &&
+        typeof two_replace_backgrounds != "undefined"
+      ) {
+        two_replace_backgrounds();
+      }
+    }
+
+    function two_connect_style(data, fixed_google_font = false) {
+      if (
+        fixed_google_font === false &&
+        typeof two_merge_google_fonts !== "undefined" &&
+        data["original_url"] &&
+        data["original_url"].startsWith("https://fonts.googleapis.com/css") &&
+        data["response"]
+      ) {
+        data["response"].text().then(function (content) {
+          content = two_merge_google_fonts(content);
+          let blob = new Blob([content], {
+            type: data["response"].type,
+          });
+          data["url"] = URL.createObjectURL(blob);
+          two_connect_style(data, true);
+        });
+        return;
+      }
+      var link = document.createElement("link");
+      link.className = "loaded_two_worker";
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = data.url;
+      link.media = data.media;
+      link.onload = function () {
+        if (
+          data.connected_length == data.length &&
+          typeof two_replace_backgrounds != "undefined"
+        ) {
+          two_replace_backgrounds();
+        }
+        two_styles_loaded();
+      };
+      link.onerror = function () {
+        two_styles_loaded();
+      };
+      document.getElementsByTagName("head")[0].appendChild(link);
+    }
+    var two_event;
+
+    function two_connect_script(i, scripts_list = null) {
+      if (i === 0 && event) {
+        two_event = event;
+        event.preventDefault();
+      }
+      if (scripts_list === null) {
+        scripts_list = two_script_list;
+      }
+      if (typeof scripts_list[i] !== "undefined") {
+        let data_uid = '[data-two_delay_id="' + scripts_list[i].uid + '"]';
+        let current_script = document.querySelector(data_uid);
+        let script = document.createElement("script");
+        script.type = "text/javascript";
+        script.async = false;
+        if (scripts_list[i].inline) {
+          var js_code = decodeURIComponent(atob(scripts_list[i].code));
+          var blob = new Blob([js_code], {
+            type: "text/javascript",
+          });
+          scripts_list[i].url = URL.createObjectURL(blob);
+        }
+        if (
+          current_script != null &&
+          typeof scripts_list[i].url != "undefined"
+        ) {
+          script.dataset.src = scripts_list[i].url;
+          current_script.parentNode.insertBefore(script, current_script);
+          current_script.getAttributeNames().map(function (name) {
+            let value = current_script.getAttribute(name);
+            try {
+              script.setAttribute(name, value);
+            } catch (error) {
+              console.log(error);
+            }
+          });
+          current_script.remove();
+          script.classList.add("loaded_two_worker_js");
+        }
+        i++;
+        two_connect_script(i, scripts_list);
+      } else {
+        document.querySelectorAll(".loaded_two_worker_js").forEach((elem) => {
+          if (elem.dataset.src) {
+            elem.setAttribute("src", elem.dataset.src);
+          }
+        });
+      }
+    }
+
+    function two_connect_font(data) {
+      let font_face = data.font_face;
+      if (font_face.indexOf("font-display") >= 0) {
+        const regex = /font-display:[ ]*[a-z]*[A-Z]*;/g;
+        while ((m = regex.exec(font_face)) !== null) {
+          if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
+          }
+          m.forEach((match, groupIndex) => {
+            console.log(match);
+            font_face.replace(match, "font-display: swap;");
+          });
+        }
+      } else {
+        font_face = font_face.replace("}", ";font-display: swap;}");
+      }
+      if (typeof data.main_url != "undefined") {
+        font_face = font_face.replace(data.main_url, data.url);
+      }
+      var newStyle = document.createElement("style");
+      newStyle.className = "two_critical_font";
+      newStyle.appendChild(document.createTextNode(font_face));
+      document.head.appendChild(newStyle);
+    }
+    let connect_stile_timeout = setInterval(function () {
+      console.log(window.two_page_loaded);
+      if (window.two_page_loaded) {
+        clearInterval(connect_stile_timeout);
+        two_worker_styles_list.forEach(function (item, index) {
+          two_connect_style(item);
+        });
+        two_worker_styles_list = [];
+      }
+    }, 500);
+
+    function two_styles_loaded() {
+      if (two_css_list.length - ++two_worker_styles_count == 0) {
+        var critical_css = document.getElementById("two_critical_css");
+        if (critical_css) {
+          critical_css.remove();
+        }
+        onStylesLoadEvent = new Event("two_css_loaded");
+        window.dispatchEvent(onStylesLoadEvent);
+      }
+    }
+  </script>
+ <script src="index.js"></script>
+
+
+  <!-- Google Tag Manager (noscript) -->
+
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <defs>
+    <filter id="wp-duotone-dark-grayscale">
+      <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+        values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0 0.49803921568627" />
+        <feFuncG type="table" tableValues="0 0.49803921568627" />
+        <feFuncB type="table" tableValues="0 0.49803921568627" />
+        <feFuncA type="table" tableValues="1 1" />
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs>
+  </svg>
+
+  <defs>
+    <filter id="wp-duotone-grayscale">
+      <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+        values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0 1" />
+        <feFuncG type="table" tableValues="0 1" />
+        <feFuncB type="table" tableValues="0 1" />
+        <feFuncA type="table" tableValues="1 1" />
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs>
+  <defs>
+    <filter id="wp-duotone-purple-yellow">
+      <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+        values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" />
+        <feFuncG type="table" tableValues="0 1" />
+        <feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" />
+        <feFuncA type="table" tableValues="1 1" />
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs>
+  </svg>
+
+  <defs>
+    <filter id="wp-duotone-blue-red">
+      <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+        values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0 1" />
+        <feFuncG type="table" tableValues="0 0.27843137254902" />
+        <feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" />
+        <feFuncA type="table" tableValues="1 1" />
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs></svg>
+  <defs>
+    <filter id="wp-duotone-midnight">
+      <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+        values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0 0" />
+        <feFuncG type="table" tableValues="0 0.64705882352941" />
+        <feFuncB type="table" tableValues="0 1" />
+        <feFuncA type="table" tableValues="1 1" />
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs>
+  </svg>
+
+  <defs>
+    <filter id="wp-duotone-magenta-yellow">
+      <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+        values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0.78039215686275 1" />
+        <feFuncG type="table" tableValues="0 0.94901960784314" />
+        <feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" />
+        <feFuncA type="table" tableValues="1 1" />
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs></svg>
+  <defs>
+    <filter id="wp-duotone-purple-green">
+      <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+        values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" />
+        <feFuncG type="table" tableValues="0 1" />
+        <feFuncB type="table" tableValues="0.44705882352941 0.4" />
+        <feFuncA type="table" tableValues="1 1" />
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs>
+  </svg>
+
+  <defs>
+    <filter id="wp-duotone-blue-orange">
+      <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+        values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+      <feComponentTransfer color-interpolation-filters="sRGB">
+        <feFuncR type="table" tableValues="0.098039215686275 1" />
+        <feFuncG type="table" tableValues="0 0.66274509803922" />
+        <feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" />
+        <feFuncA type="table" tableValues="1 1" />
+      </feComponentTransfer>
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs>
+  </svg>
+  <div data-elementor-type="header" data-elementor-id="80" class="elementor elementor-80 elementor-location-header">
+    <section data-dce-background-color="#FFFFFF00"
+      class="elementor-section elementor-top-section elementor-element elementor-element-e7e1bd6 elementor-section-stretched elementor-section-full_width elementor-section-height-min-height elementor-section-content-middle she-header-yes elementor-section-height-default elementor-section-items-middle"
+      data-id="e7e1bd6" data-element_type="section"
+      data-settings='{"stretch_section":"section-stretched","background_background":"classic","sticky":"top","animation":"none","transparent":"yes","scroll_distance":{"unit":"px","size":30,"sizes":[]},"background_show":"yes","background":"#FFFFFF","bottom_border":"yes","custom_bottom_border_color":"#D1D1D1","custom_bottom_border_width":{"unit":"px","size":1,"sizes":[]},"shrink_header":"yes","custom_height_header":{"unit":"px","size":40,"sizes":[]},"change_logo_color":"yes","sticky_on":["desktop","tablet","mobile"],"sticky_offset":0,"sticky_effects_offset":0,"transparent_on":["desktop","tablet","mobile"],"scroll_distance_tablet":{"unit":"px","size":"","sizes":[]},"scroll_distance_mobile":{"unit":"px","size":"","sizes":[]},"custom_bottom_border_width_tablet":{"unit":"px","size":"","sizes":[]},"custom_bottom_border_width_mobile":{"unit":"px","size":"","sizes":[]},"custom_height_header_tablet":{"unit":"px","size":"","sizes":[]},"custom_height_header_mobile":{"unit":"px","size":"","sizes":[]}}'>
+      <div class="elementor-container elementor-column-gap-no">
+        <div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-6dbb4f5"
+          data-id="6dbb4f5" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div
+              class="elementor-element elementor-element-bf1a061 dce_masking-none elementor-widget elementor-widget-image"
+              data-id="bf1a061" data-element_type="widget" data-widget_type="image.default">
+              <div class="elementor-widget-container">
+                <a href="https://maisoninfratech.in/">
+                  <noscript><img decoding="async" width="486" height="104"
+                      src="images/Central-Park-Sector-104-Gurgaon-Logo.jpg"
+                      class="attachment-full size-full wp-image-11733" alt="Central Park Sector 104 Gurgaon Logo"
+                      sizes="(max-width: 486px) 100vw, 486px" /></noscript><img decoding="async" width="486"
+                    height="104" src="images/Central-Park-Sector-104-Gurgaon-Logo.jpg" data-src="."
+                    class="lazy attachment-full size-full wp-image-11733" alt="Central Park Sector 104 Gurgaon Logo"
+                    data-srcset="wp-content/uploads/2023/08/Central-Park-Sector-104-Gurgaon-Logo.jpg 486w, wp-content/uploads/2023/08/Central-Park-Sector-104-Gurgaon-Logo-300x64.jpg 300w"
+                    data-sizes="(max-width: 486px) 100vw, 486px" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-42b1056 elementor-hidden-desktop elementor-hidden-tablet"
+          data-id="42b1056" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div data-dce-background-color="#61CE7000"
+              class="elementor-element elementor-element-f298405 elementor-mobile-align-right nav-call elementor-widget elementor-widget-button"
+              data-id="f298405" data-element_type="widget" data-widget_type="button.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-button-wrapper">
+                  <a class="elementor-button elementor-button-link elementor-size-sm" href="tel:+91 9999156255">
+                    <span class="elementor-button-content-wrapper">
+                      <span class="elementor-button-icon elementor-align-icon-left">
+                        <i aria-hidden="true" class="fas fa-phone-alt"></i>
+                      </span>
+                      <span class="elementor-button-text">+91 9999156255</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-ab7b883"
+          data-id="ab7b883" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div
+              class="elementor-element elementor-element-860cbbb elementor-nav-menu--stretch elementor-nav-menu__align-center elementor-nav-menu--dropdown-mobile elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu"
+              data-id="860cbbb" data-element_type="widget"
+              data-settings='{"full_width":"stretch","layout":"horizontal","submenu_icon":{"value":"&lt;i class=\"fas fa-caret-down\"&gt;&lt;\/i&gt;","library":"fa-solid"},"toggle":"burger"}'
+              data-widget_type="nav-menu.default">
+              <div class="elementor-widget-container">
+                <nav migration_allowed="1" migrated="0"
+                  class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-fade">
+                  <ul id="menu-1-860cbbb" class="elementor-nav-menu">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1582">
+                      <a href="#" class="elementor-item">Home</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1584">
+                      <a href="#overview" class="elementor-item elementor-item-anchor">Overview</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1585">
+                      <a href="#price" class="elementor-item elementor-item-anchor">Price</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1586">
+                      <a href="#amenities" class="elementor-item elementor-item-anchor">Amenities</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1587">
+                      <a href="#gallery" class="elementor-item elementor-item-anchor">Gallery</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1859">
+                      <a href="#location" class="elementor-item elementor-item-anchor">Location</a>
+                    </li>
+                  </ul>
+                </nav>
+                <div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle"
+                  aria-expanded="false">
+                  <i aria-hidden="true" role="presentation"
+                    class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true"
+                    role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>
+                  <span class="elementor-screen-only">Menu</span>
+                </div>
+                <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+                  <ul id="menu-2-860cbbb" class="elementor-nav-menu">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1582">
+                      <a href="#" class="elementor-item" tabindex="-1">Home</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1584">
+                      <a href="#overview" class="elementor-item elementor-item-anchor" tabindex="-1">Overview</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1585">
+                      <a href="#price" class="elementor-item elementor-item-anchor" tabindex="-1">Price</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1586">
+                      <a href="#amenities" class="elementor-item elementor-item-anchor" tabindex="-1">Amenities</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1587">
+                      <a href="#gallery" class="elementor-item elementor-item-anchor" tabindex="-1">Gallery</a>
+                    </li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1859">
+                      <a href="#location" class="elementor-item elementor-item-anchor" tabindex="-1">Location</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-60823c9 elementor-hidden-phone"
+          data-id="60823c9" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div
+              class="elementor-element elementor-element-57223d8 elementor-hidden-tablet elementor-widget elementor-widget-heading"
+              data-id="57223d8" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  <a href="tel:+91 9999156255">+91 9999156255</a>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="elementor-column elementor-col-20 elementor-top-column elementor-element elementor-element-087509a elementor-hidden-phone"
+          data-id="087509a" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div
+              class="elementor-element elementor-element-2d556ea elementor-hidden-tablet dce_masking-none elementor-widget elementor-widget-image"
+              data-id="2d556ea" data-element_type="widget" data-widget_type="image.default">
+              <div class="elementor-widget-container">
+                <noscript><img decoding="async" width="350" height="100" src="images/maisoninfra1.png"
+                    class="attachment-large size-large wp-image-10306" alt="final Property in gurugram logo" srcset="
+                        images/maisoninfra1.png 350w,
+                        images/maisoninfra1.png 300w
+                      " sizes="(max-width: 350px) 100vw, 350px" /></noscript><img decoding="async" width="350"
+                  height="100" src="images/maisoninfra1.png"
+                  data-src="https://propertyingurugram.in/wp-content/uploads/2023/02/final-Property-in-gurugram-logo-01.png"
+                  class="lazy attachment-large size-large wp-image-10306" alt="final Property in gurugram logo"
+                  data-srcset="images/maisoninfra1.png 350w, images/maisoninfra1.png 300w"
+                  data-sizes="(max-width: 350px) 100vw, 350px" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div data-elementor-type="single" data-elementor-id="84"
+    class="elementor elementor-84 elementor-location-single post-11730 residential type-residential status-publish has-post-thumbnail hentry property-city-dwarka-expressway-projects property-status-coming-soon property-type-3-bhk-apartments property-type-4-bhk-apartments property-type-5-bhk-apartments property-type-apartments property-type-luxury-residential-apartments property-type-residential property-type-ultra-luxury-apartments">
+    <section data-dce-background-overlay-color="rgba(0, 0, 0, 0.58)"
+      data-dce-background-image-url="images/Central-Park-Sector-104-Gurgaon.jpg"
+      class="elementor-section elementor-top-section elementor-element elementor-element-f7ebed6 elementor-section-height-min-height elementor-section-full_width elementor-section-height-default elementor-section-items-middle"
+      data-id="f7ebed6" data-element_type="section" data-settings='{"background_background":"classic"}'>
+      <div class="elementor-background-overlay"></div>
+      <div class="elementor-container elementor-column-gap-default">
+        <div
+          class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-3c5de89 elementor-hidden-tablet elementor-hidden-phone"
+          data-id="3c5de89" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-4dd3da6 elementor-widget elementor-widget-heading"
+              data-id="4dd3da6" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h1 class="elementor-heading-title elementor-size-default">
+                  Central Park Sector 104 Gurgaon
+                </h1>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-5c1d2ba elementor-position-left elementor-vertical-align-middle elementor-view-default elementor-mobile-position-top elementor-widget elementor-widget-icon-box"
+              data-id="5c1d2ba" data-element_type="widget" data-widget_type="icon-box.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-icon-box-wrapper">
+                  <div class="elementor-icon-box-icon">
+                    <span class="elementor-icon elementor-animation-">
+                      <i aria-hidden="true" class="fas fa-map-marker-alt"></i>
+                    </span>
+                  </div>
+                  <div class="elementor-icon-box-content">
+                    <h3 class="elementor-icon-box-title">
+                      <span> Sector 104 Gurgaon </span>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-6ee035d elementor-widget elementor-widget-text-editor"
+              data-id="6ee035d" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container"></div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-e53f3fd elementor-hidden-tablet elementor-hidden-phone"
+          data-id="e53f3fd" data-element_type="column" data-settings='{"background_background":"classic"}'>
+          <div class="elementor-widget-wrap elementor-element-populated"
+            style="background-color: grey; border-radius: 10px;">
+            <div class="elementor-element elementor-element-74b2f4c elementor-widget elementor-widget-heading"
+              data-id="74b2f4c" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  Download Central Park Sector 104 Gurgaon BROCHURE Here!
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-7883cf8 elementor-button-align-stretch elementor-widget elementor-widget-form"
+              data-id="7883cf8" data-element_type="widget"
+              data-settings='{"step_next_label":"Next","step_previous_label":"Previous","button_width":"100","dce_confirm_dialog_enabled":"no","step_type":"number_text","step_icon_shape":"circle","label_icon_size":{"unit":"px","size":"","sizes":[]},"field_icon_size":{"unit":"px","size":"","sizes":[]}}'
+              data-widget_type="form.default">
+              <div class="elementor-widget-container">
+                <form class="elementor-form" method="post" name="New Form" action="processform.php">
+                  <div class="elementor-form-fields-wrapper elementor-labels-">
+                    <div
+                      class="elementor-field-type-text elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+                      <label for="form-field-name" class="elementor-field-label elementor-screen-only">Name</label>
+                      <input type="text" name="name" id="form-field-name"
+                        class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Name*"
+                        required="required" aria-required="true">
+                    </div>
+                    <div
+                      class="elementor-field-type-tel elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+                      <label for="form-field-field_b6b148c" class="elementor-field-label elementor-screen-only">Mobile
+                        Number</label>
+                      <input type="tel" name="mobile" id="form-field-field_b6b148c"
+                        class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Mobile No*"
+                        required="required" aria-required="true" pattern="[0-9()#&amp;+*-=.]+"
+                        title="Only numbers and phone characters (#, -, *, etc) are accepted.">
+                    </div>
+                    <div
+                      class="elementor-field-type-email elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+                      <label for="form-field-email" class="elementor-field-label elementor-screen-only">Email</label>
+                      <input type="email" name="email" id="form-field-email"
+                        class="elementor-field elementor-size-sm elementor-field-textual" placeholder="E-mail*"
+                        required="required" aria-required="true">
+                    </div>
+                    <div
+                      class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-100 e-form__buttons">
+                      <button type="submit" class="elementor-button elementor-size-sm" id="new">
+                        <span>
+                          <span class="elementor-button-icon"> </span>
+                          <span class="elementor-button-text">GET DETAILS</span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+            <div data-dce-background-color="#61CE7000"
+              class="elementor-element elementor-element-13f3261 elementor-align-justify elementor-widget elementor-widget-button"
+              data-id="13f3261" data-element_type="widget" data-widget_type="button.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-button-wrapper">
+                  <a class="elementor-button elementor-button-link elementor-size-sm" href="tel:+91 9999156255">
+                    <span class="elementor-button-content-wrapper">
+                      <span class="elementor-button-icon elementor-align-icon-left">
+                        <i aria-hidden="true" class="fas fa-phone-alt"></i>
+                      </span>
+                      <span class="elementor-button-text">+91 9999156255</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="elementor-section elementor-top-section elementor-element elementor-element-73e9006 elementor-hidden-desktop elementor-reverse-tablet elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+      data-id="73e9006" data-element_type="section" data-settings='{"animation":"none"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div data-dce-background-color="#99292B"
+          class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-ebada9f"
+          data-id="ebada9f" data-element_type="column" data-settings='{"background_background":"classic"}'>
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-4289af2 elementor-widget elementor-widget-heading"
+              data-id="4289af2" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  Download Central Park Sector 104 Gurgaon BROCHURE Here!
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-d118f38 elementor-button-align-stretch elementor-widget elementor-widget-form"
+              data-id="d118f38" data-element_type="widget"
+              data-settings='{"step_next_label":"Next","step_previous_label":"Previous","button_width":"100","dce_confirm_dialog_enabled":"no","step_type":"number_text","step_icon_shape":"circle","label_icon_size":{"unit":"px","size":"","sizes":[]},"field_icon_size":{"unit":"px","size":"","sizes":[]}}'
+              data-widget_type="form.default">
+              <div class="elementor-widget-container">
+                <form class="elementor-form" method="post" name="New Form" action="processform.php">
+                  <div class="elementor-form-fields-wrapper elementor-labels-">
+                    <div
+                      class="elementor-field-type-text elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+                      <label for="form-field-name" class="elementor-field-label elementor-screen-only">Name</label>
+                      <input type="text" name="name" id="form-field-name"
+                        class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Name*"
+                        required="required" aria-required="true">
+                    </div>
+                    <div
+                      class="elementor-field-type-tel elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+                      <label for="form-field-field_b6b148c" class="elementor-field-label elementor-screen-only">Mobile
+                        Number</label>
+                      <input type="tel" name="mobile" id="form-field-field_b6b148c"
+                        class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Mobile No*"
+                        required="required" aria-required="true" pattern="[0-9()#&amp;+*-=.]+"
+                        title="Only numbers and phone characters (#, -, *, etc) are accepted.">
+                    </div>
+                    <div
+                      class="elementor-field-type-email elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+                      <label for="form-field-email" class="elementor-field-label elementor-screen-only">Email</label>
+                      <input type="email" name="email" id="form-field-email"
+                        class="elementor-field elementor-size-sm elementor-field-textual" placeholder="E-mail*"
+                        required="required" aria-required="true">
+                    </div>
+                    <div
+                      class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-100 e-form__buttons">
+                      <button type="submit" class="elementor-button elementor-size-sm" id="new">
+                        <span>
+                          <span class="elementor-button-icon"> </span>
+                          <span class="elementor-button-text">GET DETAILS</span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div data-dce-background-color="#61CE7000"
+              class="elementor-element elementor-element-718fdd0 elementor-align-justify elementor-widget elementor-widget-button"
+              data-id="718fdd0" data-element_type="widget" data-widget_type="button.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-button-wrapper">
+                  <a class="elementor-button elementor-button-link elementor-size-sm" href="tel:+919999156255">
+                    <span class="elementor-button-content-wrapper">
+                      <span class="elementor-button-icon elementor-align-icon-left">
+                        <i aria-hidden="true" class="fas fa-phone-alt"></i>
+                      </span>
+                      <span class="elementor-button-text">+91 9999156255</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-dce-background-color="#000000"
+          class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-5af439c"
+          data-id="5af439c" data-element_type="column" data-settings='{"background_background":"classic"}'>
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-90c703f elementor-widget elementor-widget-heading"
+              data-id="90c703f" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  Central Park Sector 104 Gurgaon
+                </h2>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-913cfcb elementor-widget elementor-widget-text-editor"
+              data-id="913cfcb" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <i class="fa fa-map-marker" aria-hidden="true"></i> Sector 104
+                Gurgaon
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-c5577d1 elementor-widget elementor-widget-text-editor"
+              data-id="c5577d1" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="elementor-section elementor-top-section elementor-element elementor-element-7ecf048 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+      data-id="7ecf048" data-element_type="section"
+      data-settings='{"background_background":"classic","animation":"none"}' style="background-color: grey;">
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-07fc8ef"
+          data-id="07fc8ef" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-134c48f elementor-widget elementor-widget-text-editor"
+              data-id="134c48f" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <p>SIZES</p>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-4992c9a elementor-widget elementor-widget-heading"
+              data-id="4992c9a" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  2600-3800 Sq Ft
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-c5aa0a7"
+          data-id="c5aa0a7" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-2023f4a elementor-widget elementor-widget-text-editor"
+              data-id="2023f4a" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <p>UNITS</p>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-d62b028 elementor-widget elementor-widget-heading"
+              data-id="d62b028" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  3/4 BHK LUXURY APARTMENTS
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-210aac3"
+          data-id="210aac3" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-e3b9065 elementor-widget elementor-widget-text-editor"
+              data-id="e3b9065" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <p>STARTING FROM</p>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-6961f9d elementor-widget elementor-widget-heading"
+              data-id="6961f9d" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  <i class="fa fa-inr" aria-hidden="true"></i> 4.68 Cr*
+                  Onwards
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-ca79e8f"
+          data-id="ca79e8f" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-e2a73f7 elementor-widget elementor-widget-text-editor"
+              data-id="e2a73f7" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <p>STATUS</p>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-9ba92e1 elementor-widget elementor-widget-jet-listing-dynamic-terms"
+              data-id="9ba92e1" data-element_type="widget" data-widget_type="jet-listing-dynamic-terms.default">
+              <div class="elementor-widget-container">
+                <div class="jet-listing jet-listing-dynamic-terms">
+                  <a href="https://maisoninfratech.in" class="jet-listing-dynamic-terms__link" target="_blank">Coming
+                    Soon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#FFFFFF"
+      class="elementor-section elementor-top-section elementor-element elementor-element-262d6df elementor-section-full_width elementor-reverse-mobile elementor-reverse-tablet elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-phone elementor-section-height-default elementor-section-height-default elementor-invisible"
+      data-id="262d6df" data-element_type="section" id="offer"
+      data-settings='{"background_background":"classic","animation":"fadeInUp"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-95e1178"
+          data-id="95e1178" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-e71e2ea elementor-widget elementor-widget-heading"
+              data-id="e71e2ea" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  Current Offers
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-30a6abd elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+              data-id="30a6abd" data-element_type="widget" data-widget_type="divider.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-divider">
+                  <span class="elementor-divider-separator"> </span>
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-ca692ed elementor-widget elementor-widget-text-editor"
+              data-id="ca692ed" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container"></div>
+            </div>
+            <div data-dce-background-color="#AA8036"
+              class="elementor-element elementor-element-31e3506 elementor-align-center elementor-widget elementor-widget-button"
+              data-id="31e3506" data-element_type="widget" data-widget_type="button.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-button-wrapper">
+                  <a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+                    <span class="elementor-button-content-wrapper">
+                      <span class="elementor-button-text">GET OFFER DETAILS</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#4C4D50"
+      class="elementor-section elementor-top-section elementor-element elementor-element-500786c elementor-section-full_width elementor-section-height-min-height elementor-section-height-default elementor-section-items-middle"
+      data-id="500786c" data-element_type="section" id="overview"
+      data-settings='{"background_background":"classic","animation":"none"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-c1139f2"
+          data-id="c1139f2" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-4d293a7 elementor-widget elementor-widget-heading"
+              data-id="4d293a7" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  OVERVIEW
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-c58f50f elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+              data-id="c58f50f" data-element_type="widget" data-widget_type="divider.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-divider">
+                  <span class="elementor-divider-separator"> </span>
+                </div>
+              </div>
+            </div>
+            <section
+              class="elementor-section elementor-inner-section elementor-element elementor-element-fe9c538 elementor-section-full_width elementor-section-height-min-height elementor-section-content-middle elementor-section-height-default"
+              data-id="fe9c538" data-element_type="section">
+              <div class="elementor-container elementor-column-gap-default">
+                <div
+                  class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-6338703"
+                  data-id="6338703" data-element_type="column">
+                  <div class="elementor-widget-wrap elementor-element-populated">
+                    <div
+                      class="elementor-element elementor-element-423e030 elementor-widget elementor-widget-theme-post-content"
+                      data-id="423e030" data-element_type="widget" data-widget_type="theme-post-content.default">
+                      <div class="elementor-widget-container">
+                        <h5>
+                          Central Park Sector 104 Gurgaon is an unmatched
+                          Residential property located in Dwarka Expressway,
+                          Gurugram.
+                        </h5>
+                        <p>
+                          The project offers plenty of benefits that includes
+                          prime location, comfortable and lavish lifestyle,
+                          great amenities, healthy surroundings and high
+                          return.
+                        </p>
+                        <p>
+                          Central Park Sector 104 Gurgaon
+                          is stretched over 7.85 acres of beautifully
+                          manicured land. The uniqueness of the apartments are
+                          that all the three sides are open, thus giving you
+                          the feel of living amidst nature. This ambitious
+                          residential project features high rise apartments
+                          and villas.
+                        </p>
+                        <p style="font-weight: 400">
+                          This wonderful development gives you the chance to
+                          choose from 3-4-5 BHK apartments. It comprises of a
+                          huge open area on its ground level to be used as
+                          Green Spaces. This entire open area has been
+                          provided keeping in mind the various recreational
+                          activities of the residents. The lush and an
+                          expansive view of the urban scenery is sure to sooth
+                          your tired mind after a long hectic day.
+                        </p>
+                        <p class="text-justify">
+                          Central Park Sector 104 Gurgaon will well connect
+                          all the parts of Delhi and National Capital Region
+                          via roadways. There is an easy mode of conveyance to
+                          make convenient to move to any place nearby.
+                          Thoughtful landscaping fits the natural surroundings
+                          well. The landscaping design will be very easy to
+                          pursue and in addition to this, it also fulfils the
+                          present day needs of the eco-friendly designs.
+                        </p>
+                        <p class="text-justify">
+                          Optimum finishes with the ideal architecture which
+                          will create a huge fad in the people. There will be
+                          a vivid ray of hope at Emerald Bay Flats Gurgaon
+                          which guides the people to a tranquil and relaxing
+                          home and there will be immense warmth which will
+                          keep the people there as it is exactly an image of
+                          common dream of many people. There will be a
+                          satisfaction and one can never feel sorry about the
+                          precious money of his hard work which gets invest in
+                          it.
+                        </p>
+                        <p style="font-weight: 400">
+                          Each apartment in this project has been built
+                          abiding by the international standards of
+                          architecture. Care has been taken in constructing
+                          the interiors of all the pads. Imported marbles and
+                          woods have been used for floorings. For the
+                          ceilings- acrylic emulsion paints and weather proof
+                          paints have been used. To give a trendy chic look to
+                          the apartments UPVC and aluminum windows have been
+                          fitted. Stylish fixtures like modular kitchens plus
+                          kitchens with hobs and chimneys have been provided
+                          to make your kitchens look fabulously on-trend.
+                        </p>
+                      </div>
+                    </div>
+                    <div data-dce-background-color="#FFFFFF"
+                      class="elementor-element elementor-element-d4ad9e0 elementor-mobile-align-center elementor-tablet-align-center elementor-widget elementor-widget-button"
+                      data-id="d4ad9e0" data-element_type="widget" data-widget_type="button.default">
+                      <div class="elementor-widget-container">
+                        <div class="elementor-button-wrapper">
+                          <!-- <button id="open-popup" class="elementor-button elementor-button-link elementor-size-sm">
+                            <span class="elementor-button-content-wrapper">
+                              <span class="elementor-button-text">DOWNLOAD BROCHURE</span>
+                            </span>
+                          </button> -->
+                          <a id="open-popup" class="elementor-button elementor-button-link elementor-size-sm" href="#">
+                            <span class="elementor-button-content-wrapper">
+                              <span class="elementor-button-text">DOWNLOAD BROCHURE</span>
+                            </span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-dce-background-image-url="images/Central-Park-Sector-104-Gurgaon.jpg"
+                  class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-61b5cc1 elementor-hidden-tablet elementor-hidden-phone"
+                  data-id="61b5cc1" data-element_type="column" data-settings='{"background_background":"classic"}'>
+                  <div class="elementor-widget-wrap"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#FFFFFF"
+      class="elementor-section elementor-top-section elementor-element elementor-element-050d88c elementor-section-full_width elementor-reverse-mobile elementor-reverse-tablet elementor-section-height-default elementor-section-height-default"
+      data-id="050d88c" data-element_type="section"
+      data-settings='{"background_background":"classic","animation":"none"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6d25352"
+          data-id="6d25352" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-a4da119 elementor-widget elementor-widget-heading"
+              data-id="a4da119" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  KEY FEATURES
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-9a89e9f elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+              data-id="9a89e9f" data-element_type="widget" data-widget_type="divider.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-divider">
+                  <span class="elementor-divider-separator"> </span>
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-9ccba8a elementor-widget elementor-widget-text-editor"
+              data-id="9ccba8a" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <ul>
+                  <li>3 and 4 BHK Apartments &amp; Penthouses.</li>
+                  <li>Modular Kitchen with European-styled cabinetry.</li>
+                  <li>
+                    Energy-efficient VRV/VRF Air-conditioned apartments.
+                  </li>
+                  <li>Roof Top Jogging Track.</li>
+                  <li>Horse Riding and Shooting Ground.</li>
+                  <li>Floating sauna and picturesque pool.</li>
+                  <li>
+                    On the jogging track on the roof, you can take a morning
+                    walk.
+                  </li>
+                  <li>
+                    Marble from another country and floors that don&#8217;t
+                    slip.
+                  </li>
+                  <li>
+                    High-end places to live that have everything you need
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#4C4D50"
+      class="elementor-section elementor-top-section elementor-element elementor-element-ee724c1 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+      data-id="ee724c1" data-element_type="section" id="price"
+      data-settings='{"background_background":"classic","animation":"none"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-ffb80de"
+          data-id="ffb80de" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-9539c80 elementor-widget elementor-widget-heading"
+              data-id="9539c80" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  PRICE LIST & FLOOR PLAN
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-785d4b8 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+              data-id="785d4b8" data-element_type="widget" data-widget_type="divider.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-divider">
+                  <span class="elementor-divider-separator"> </span>
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-6151903 elementor-widget elementor-widget-text-editor"
+              data-id="6151903" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container"></div>
+            </div>
+            <div data-dce-background-color="#FFFFFF00"
+              class="elementor-element elementor-element-88e626b elementor-align-center elementor-widget elementor-widget-button"
+              data-id="88e626b" data-element_type="widget" data-widget_type="button.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-button-wrapper">
+                  <a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+                    <span class="elementor-button-content-wrapper">
+                      <span class="elementor-button-text">DOWNLOAD FLOOR PLAN</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#FFFFFF" data-dce-background-overlay-color="#000000"
+      class="elementor-section elementor-top-section elementor-element elementor-element-13c2fff elementor-section-full_width elementor-reverse-tablet elementor-reverse-mobile elementor-section-height-default elementor-section-height-default"
+      data-id="13c2fff" data-element_type="section" id="amenities"
+      data-settings='{"background_background":"classic","animation":"none"}'>
+      <div class="elementor-background-overlay"></div>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-c8691f8"
+          data-id="c8691f8" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-ae23bce elementor-widget elementor-widget-heading"
+              data-id="ae23bce" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  AMENITIES
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-f973520 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+              data-id="f973520" data-element_type="widget" data-widget_type="divider.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-divider">
+                  <span class="elementor-divider-separator"> </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-3b63f55 elementor-arrows-position-inside elementor-widget elementor-widget-image-carousel"
+              data-id="3b63f55" data-element_type="widget"
+              data-settings='{"slides_to_show":"4","navigation":"arrows","autoplay_speed":1000,"slides_to_show_mobile":"1","autoplay":"yes","pause_on_hover":"yes","pause_on_interaction":"yes","infinite":"yes","speed":500}'
+              data-widget_type="image-carousel.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-image-carousel-wrapper swiper-container" dir="ltr">
+                  <div class="elementor-image-carousel swiper-wrapper" aria-live="off">
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_2-1.png"
+                          alt="Reading Area" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Reading Area
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_3.png"
+                          alt="Multipurpose Hall" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Multipurpose Hall
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_4.png"
+                          alt="Kids Play Area" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Kids Play Area
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_5.png"
+                          alt="Meeting Rooms" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Meeting Rooms
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="5 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_6.png"
+                          alt="Outdoor Swimming Pool" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Outdoor Swimming Pool
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="6 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_7.png" alt="Cafe" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Cafe
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="7 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_8.png"
+                          alt="Experience Centre" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Experience Centre
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="8 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_9.png"
+                          alt="Indoor Games Zone" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Indoor Games Zone
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="9 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_10.png"
+                          alt="Music Room" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Music Room
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="10 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_11.png"
+                          alt="Kids Plunge Pool" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Kids Plunge Pool
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="11 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_12.png" alt="Art Wall" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Art Wall
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="12 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_14.png" alt="Lounge" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Lounge
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="13 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_16.png"
+                          alt="Outdoor Pool Deck" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Outdoor Pool Deck
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="14 of 14">
+                      <figure class="swiper-slide-inner">
+                        <img decoding="async" class="swiper-slide-image" src="images/amenities_18.png"
+                          alt="Squash Court" />
+                        <figcaption class="elementor-image-carousel-caption">
+                          Squash Court
+                        </figcaption>
+                      </figure>
+                    </div>
+                  </div>
+                  <div class="elementor-swiper-button elementor-swiper-button-prev" role="button" tabindex="0">
+                    <i aria-hidden="true" class="eicon-chevron-left"></i>
+                  </div>
+                  <div class="elementor-swiper-button elementor-swiper-button-next" role="button" tabindex="0">
+                    <i aria-hidden="true" class="eicon-chevron-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#4C4D50"
+      class="elementor-section elementor-top-section elementor-element elementor-element-79de30c elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+      data-id="79de30c" data-element_type="section" id="gallery"
+      data-settings='{"background_background":"classic","animation":"none"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-80e97a9"
+          data-id="80e97a9" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-0e5783e elementor-widget elementor-widget-heading"
+              data-id="0e5783e" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  GALLERY
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-b654bc7 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+              data-id="b654bc7" data-element_type="widget" data-widget_type="divider.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-divider">
+                  <span class="elementor-divider-separator"> </span>
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-8d24f4d elementor-widget elementor-widget-text-editor"
+              data-id="8d24f4d" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <p>Click to enlarge</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="elementor-section elementor-top-section elementor-element elementor-element-fde032f elementor-section-stretched elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default"
+      data-id="fde032f" data-element_type="section"
+      data-settings='{"background_background":"classic","stretch_section":"section-stretched","animation":"none"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-21f7384"
+          data-id="21f7384" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div
+              class="elementor-element elementor-element-ea09046 dce_masking-none elementor-widget elementor-widget-image"
+              data-id="ea09046" data-element_type="widget" data-widget_type="image.default">
+              <div class="elementor-widget-container">
+                <noscript><img decoding="async" width="486" height="104"
+                    src="images/Central-Park-Sector-104-Gurgaon-Logo.jpg"
+                    class="attachment-large size-large wp-image-11733" alt="Central Park Sector 104 Gurgaon Logo"
+                    srcset="
+                        images/Central-Park-Sector-104-Gurgaon-Logo.jpg 486w,
+                        images/Central-Park-Sector-104-Gurgaon-Logo-300x64.jpg 300w
+                      " sizes="(max-width: 486px) 100vw, 486px" /></noscript><img decoding="async" width="486"
+                  height="104" src="images/Central-Park-Sector-104-Gurgaon-Logo.jpg"
+                  data-src="images/Central-Park-Sector-104-Gurgaon-Logo.jpg"
+                  class="lazy attachment-large size-large wp-image-11733" alt="Central Park Sector 104 Gurgaon Logo"
+                  data-srcset="images/Central-Park-Sector-104-Gurgaon-Logo.jpg 486w, images/Central-Park-Sector-104-Gurgaon-Logo-300x64.jpg 300w"
+                  data-sizes="(max-width: 486px) 100vw, 486px" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-146c687"
+          data-id="146c687" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-18a6190 elementor-widget elementor-widget-heading"
+              data-id="18a6190" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  SCHEDULE SITE VISIT OR VIRTUAL TOUR
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-e76cffc"
+          data-id="e76cffc" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div data-dce-background-color="#FFFFFF"
+              class="elementor-element elementor-element-f8d92b8 elementor-align-center elementor-widget elementor-widget-button"
+              data-id="f8d92b8" data-element_type="widget" data-widget_type="button.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-button-wrapper">
+                  <a class="elementor-button elementor-button-link elementor-size-sm" href="#">
+                    <span class="elementor-button-content-wrapper">
+                      <span class="elementor-button-text">SCHEDULE SITE VISIT</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#FFFFFF"
+      class="elementor-section elementor-top-section elementor-element elementor-element-5f6cf1f elementor-section-full_width elementor-reverse-tablet elementor-reverse-mobile elementor-section-height-default elementor-section-height-default"
+      data-id="5f6cf1f" data-element_type="section" id="location"
+      data-settings='{"background_background":"classic","animation":"none"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5b3776b"
+          data-id="5b3776b" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-8a631b1 elementor-widget elementor-widget-heading"
+              data-id="8a631b1" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  Location Advantages
+                </h2>
+              </div>
+            </div>
+            <div
+              class="elementor-element elementor-element-6263136 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+              data-id="6263136" data-element_type="widget" data-widget_type="divider.default">
+              <div class="elementor-widget-container">
+                <div class="elementor-divider">
+                  <span class="elementor-divider-separator"> </span>
+                </div>
+              </div>
+            </div>
+            <section
+              class="elementor-section elementor-inner-section elementor-element elementor-element-e3d2021 elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default"
+              data-id="e3d2021" data-element_type="section">
+              <div class="elementor-container elementor-column-gap-default">
+                <div
+                  class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-ef5b8ee"
+                  data-id="ef5b8ee" data-element_type="column">
+                  <div class="elementor-widget-wrap elementor-element-populated">
+                    <div
+                      class="elementor-element elementor-element-a2717b3 elementor-widget elementor-widget-text-editor"
+                      data-id="a2717b3" data-element_type="widget" data-widget_type="text-editor.default">
+                      <div class="elementor-widget-container">
+                        <p>
+                          Central Park Sector 104 Gurgaon is perfectly located
+                          in a neighbourhood that boasts everything the urbane
+                          lifestyle demands.
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="elementor-element elementor-element-5e1b211 elementor-widget elementor-widget-text-editor"
+                      data-id="5e1b211" data-element_type="widget" data-widget_type="text-editor.default">
+                      <div class="elementor-widget-container">
+                        <ul class="ul">
+                          <li>
+                            <strong>Connectivity of the Project Site</strong>
+                            <ul class="ul">
+                              <li>Just 7 kms from IGI Airport</li>
+                              <li>
+                                Directly on Dwarka Expressway; connecting
+                                Dwarka, NH8 &amp; Manesar through Gurgaon
+                              </li>
+                              <li>Metro 7 kms from Emerald Bay</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Residential</strong>
+                            <ul class="ul">
+                              <li>
+                                In Close proximity to 16 new residential
+                                colonies developed on Dwarka Expressway
+                              </li>
+                              <li>5 kms away from Diplomatic Enclave 2</li>
+                              <li>9 kms away from South Delhi</li>
+                              <li>13 kms away from Dhaula Kuan</li>
+                              <li>17 kms away from Connaught Place</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Commercial</strong>
+                            <ul class="ul">
+                              <li>7 kms away from Cyber City</li>
+                              <li>
+                                Just opposite the proposed commercial district
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div data-dce-background-image-url="images/Central-Park-Sector-104-Gurgaon-Location-Map.png"
+                  class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-11683e8"
+                  data-id="11683e8" data-element_type="column" data-settings='{"background_background":"classic"}'>
+                  <div class="elementor-widget-wrap elementor-element-populated">
+                    <div class="elementor-element elementor-element-ea41049 elementor-widget elementor-widget-spacer"
+                      data-id="ea41049" data-element_type="widget" data-widget_type="spacer.default">
+                      <div class="elementor-widget-container">
+                        <div class="elementor-spacer">
+                          <div class="elementor-spacer-inner"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#6C6C6C"
+      class="elementor-section elementor-top-section elementor-element elementor-element-cd4766c elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+      data-id="cd4766c" data-element_type="section" data-settings='{"background_background":"classic"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7382bfa"
+          data-id="7382bfa" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <div data-elementor-type="footer" data-elementor-id="189" class="elementor elementor-189 elementor-location-footer">
+    <section data-dce-background-color="#2A2A2A" data-dce-background-image-url="images/background-outer-wrapper.png"
+      class="elementor-section elementor-top-section elementor-element elementor-element-d17a46f elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+      data-id="d17a46f" data-element_type="section" data-settings='{"background_background":"classic"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-78e16bf"
+          data-id="78e16bf" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-4718f43 elementor-widget elementor-widget-heading"
+              data-id="4718f43" data-element_type="widget" data-widget_type="heading.default">
+              <div class="elementor-widget-container">
+                <h2 class="elementor-heading-title elementor-size-default">
+                  About us
+                </h2>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-5909318 elementor-widget elementor-widget-text-editor"
+              data-id="5909318" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <p style="color: #ffffff">
+                  We are a real estate consultancy firm working in Gurugram
+                  &amp; Delhi/NCR with a global mindset, bringing together
+                  exciting real estate developments and investment
+                  opportunities under one roof. All our services are delivered
+                  with professionalism and politeness.
+                </p>
+              </div>
+            </div>
+            <section
+              class="elementor-section elementor-inner-section elementor-element elementor-element-b55ae52 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+              data-id="b55ae52" data-element_type="section">
+              <div class="elementor-container elementor-column-gap-default">
+                <div
+                  class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-cbd2e02"
+                  data-id="cbd2e02" data-element_type="column">
+                  <div class="elementor-widget-wrap elementor-element-populated">
+                    <div class="elementor-element elementor-element-36ebdc8 elementor-widget elementor-widget-heading"
+                      data-id="36ebdc8" data-element_type="widget" data-widget_type="heading.default">
+                      <div class="elementor-widget-container">
+                        <h2 class="elementor-heading-title elementor-size-default">
+                          Follow us :
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-2e17b91"
+                  data-id="2e17b91" data-element_type="column">
+                  <div class="elementor-widget-wrap elementor-element-populated">
+                    <div
+                      class="elementor-element elementor-element-42dd0b2 e-grid-align-left elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons"
+                      data-id="42dd0b2" data-element_type="widget" data-widget_type="social-icons.default">
+                      <div class="elementor-widget-container">
+                        <div class="elementor-social-icons-wrapper elementor-grid">
+                          <span class="elementor-grid-item">
+                            <a class="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-027473a"
+                              href="https://www.facebook.com/PropriseHomes" target="_blank">
+                              <span class="elementor-screen-only">Facebook</span>
+                              <i class="fab fa-facebook"></i>
+                            </a>
+                          </span>
+
+                          <span class="elementor-grid-item">
+                            <a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-91e9187"
+                              href="https://www.instagram.com/maisoninfratechofficial/" target="_blank">
+                              <span class="elementor-screen-only">Instagram</span>
+                              <i class="fab fa-instagram"></i>
+                            </a>
+                          </span>
+
+                          <span class="elementor-grid-item">
+                            <a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-12e8d90"
+                              href="https://www.linkedin.com/company/14372659/admin/" target="_blank">
+                              <span class="elementor-screen-only">Linkedin</span>
+                              <i class="fab fa-linkedin"></i>
+                            </a>
+                          </span>
+
+                          <span class="elementor-grid-item">
+                            <a class="elementor-icon elementor-social-icon elementor-social-icon-youtube elementor-repeater-item-a0892ff"
+                              href="https://www.youtube.com/watch?v=cTZHg9viKw8" target="_blank">
+                              <span class="elementor-screen-only">Youtube</span>
+                              <i class="fab fa-youtube"></i>
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#2A2A2A"
+      class="elementor-section elementor-top-section elementor-element elementor-element-940ba68 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+      data-id="940ba68" data-element_type="section" data-settings='{"background_background":"classic"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-138f816"
+          data-id="138f816" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-bcb910b elementor-widget elementor-widget-text-editor"
+              data-id="bcb910b" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <p>
+                  This website is in the process of being updated. by
+                  accessing this website, the viewer confirms that the
+                  information including brochures and marketing collaterals on
+                  this website are solely for informational purposes only and
+                  the viewer has not relied on this information for making any
+                  booking/purchase in any project of the company. Nothing on
+                  this website, constitutes advertising, marketing, booking,
+                  selling or an offer for sale, or invitation to purchase a
+                  unit in any project by the company. The company is not
+                  liable for any consequence of any action taken by the viewer
+                  relying on such material/ information on this website.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-dce-background-color="#2A2A2A"
+      class="elementor-section elementor-top-section elementor-element elementor-element-24dba2e elementor-section-content-middle elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+      data-id="24dba2e" data-element_type="section" data-settings='{"background_background":"classic"}'>
+      <div class="elementor-container elementor-column-gap-default">
+        <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-71ea4e2"
+          data-id="71ea4e2" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-6b26904 elementor-widget elementor-widget-text-editor"
+              data-id="6b26904" data-element_type="widget" data-widget_type="text-editor.default"></div>
+          </div>
+        </div>
+        <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-106a01b"
+          data-id="106a01b" data-element_type="column">
+          <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-118b8a1 elementor-widget elementor-widget-text-editor"
+              data-id="118b8a1" data-element_type="widget" data-widget_type="text-editor.default">
+              <div class="elementor-widget-container">
+                <p>
+                  Designed by :
+                  <a href="https://www.gozoomtech.com/">Gozoom Technologies</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <div id="popup-container">
+      <div id="popup-content">
+        <span id="close-popup">&times;</span> <!-- Close button -->
+        <!-- Your form goes here -->
+        <form class="elementor-form" method="post" name="New Form" action="processform.php">
+          <div class="elementor-form-fields-wrapper elementor-labels-">
+            <div
+              class="elementor-field-type-text elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+              <label for="form-field-name" class="elementor-field-label elementor-screen-only">Name</label>
+              <input type="text" name="name" id="form-field-name"
+                class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Name*"
+                required="required" aria-required="true">
+            </div>
+            <div
+              class="elementor-field-type-tel elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+              <label for="form-field-field_b6b148c" class="elementor-field-label elementor-screen-only">Mobile
+                Number</label>
+              <input type="tel" name="mobile" id="form-field-field_b6b148c"
+                class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Mobile No*"
+                required="required" aria-required="true" pattern="[0-9()#&amp;+*-=.]+"
+                title="Only numbers and phone characters (#, -, *, etc) are accepted.">
+            </div>
+            <div
+              class="elementor-field-type-email elementor-field-group elementor-column elementor-col-100 elementor-field-required">
+              <label for="form-field-email" class="elementor-field-label elementor-screen-only">Email</label>
+              <input type="email" name="email" id="form-field-email"
+                class="elementor-field elementor-size-sm elementor-field-textual" placeholder="E-mail*"
+                required="required" aria-required="true">
+            </div>
+            <div
+              class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-100 e-form__buttons">
+              <button type="submit" class="elementor-button elementor-size-sm" id="new">
+                <span>
+                  <span class="elementor-button-icon"> </span>
+                  <span class="elementor-button-text">GET DETAILS</span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <script type="text/html" id="tmpl-jet-ajax-search-results-item">
+      <div class="jet-ajax-search__results-item">
+        <a
+          class="jet-ajax-search__item-link"
+          href="{{{data.link}}}"
+          target="{{{data.link_target_attr}}}"
+        >
+          {{{data.thumbnail}}}
+          <div class="jet-ajax-search__item-content-wrapper">
+            {{{data.before_title}}}
+            <div class="jet-ajax-search__item-title">{{{data.title}}}</div>
+            {{{data.after_title}}} {{{data.before_content}}}
+            <div class="jet-ajax-search__item-content">{{{data.content}}}</div>
+            {{{data.after_content}}} {{{data.rating}}} {{{data.price}}}
+          </div>
+        </a>
+      </div>
+    </script>
+
+  <script data-two_delay_id="two_64f85683b77ad" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-includes/js/underscore.min.js?ver=1.13.4"
+    id="underscore-js"></script>
+  <script data-two_delay_src="inline" data-two_delay_id="two_64f85683b77d0" type="text/javascript"
+    id="wp-util-js-extra"></script>
+  <script data-two_delay_id="two_64f85683b77f5" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-includes/js/wp-util.min.js?ver=6.1.3" id="wp-util-js"></script>
+  <script data-two_delay_id="two_64f85683b7818" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/jet-search/assets/lib/chosen/chosen.jquery.min.js?ver=1.8.7"
+    id="jquery-chosen-js"></script>
+  <script data-two_delay_id="two_64f85683b783a" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/jet-search/assets/js/jet-search.js?ver=3.0.3"
+    id="jet-search-js"></script>
+  <script data-two_delay_id="two_64f85683b785b" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.0.1"
+    id="smartmenus-js"></script>
+  <script data-two_delay_src="inline" data-two_delay_id="two_64f85683b787d" type="text/javascript"
+    id="jet-engine-frontend-js-extra"></script>
+  <script data-two_delay_src="inline" data-two_delay_id="two_64f85683b78a4" type="text/javascript"
+    id="jet-engine-frontend-js-before"></script>
+  <script data-two_delay_id="two_64f85683b78f1" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/jet-engine/assets/js/frontend.js?ver=3.0.6.1"
+    id="jet-engine-frontend-js"></script>
+  <script data-two_delay_id="two_64f85683b7914" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/dynamic-content-for-elementor/assets/js/fix-background-loop.min.js?ver=2.10.4"
+    id="dce-fix-background-loop-js"></script>
+  <script data-two_delay_id="two_64f85683b7935" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/dynamic-content-for-elementor/assets/js/settings.min.js?ver=2.10.4"
+    id="dce-settings-js"></script>
+  <script data-two_delay_id="two_64f85683b7955" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/dynamic-content-for-elementor/assets/js/visibility.min.js?ver=2.10.4"
+    id="dce-visibility-js"></script>
+  <script data-two_delay_id="two_64f85683b7976" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.8.2"
+    id="elementor-pro-webpack-runtime-js"></script>
+  <script data-two_delay_id="two_64f85683b7998" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.15.1"
+    id="elementor-webpack-runtime-js"></script>
+  <script data-two_delay_id="two_64f85683b79b9" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.15.1"
+    id="elementor-frontend-modules-js"></script>
+  <script data-two_delay_id="two_64f85683b79dd" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9"
+    id="regenerator-runtime-js"></script>
+  <script data-two_delay_id="two_64f85683b7a06" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0"
+    id="wp-polyfill-js"></script>
+  <script data-two_delay_id="two_64f85683b7a2c" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-includes/js/dist/hooks.min.js?ver=4169d3cf8e8d95a3d6d5"
+    id="wp-hooks-js"></script>
+  <script data-two_delay_id="two_64f85683b7a4f" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-includes/js/dist/i18n.min.js?ver=9e794f35a71bb98672ae"
+    id="wp-i18n-js"></script>
+  <script data-two_delay_src="inline" data-two_delay_id="two_64f85683b7a72" type="text/javascript"
+    id="wp-i18n-js-after"></script>
+  <script data-two_delay_src="inline" data-two_delay_id="two_64f85683b7a98" type="text/javascript"
+    id="elementor-pro-frontend-js-before"></script>
+  <script data-two_delay_id="two_64f85683b7add" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.8.2"
+    id="elementor-pro-frontend-js"></script>
+  <script data-two_delay_id="two_64f85683b7b03" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2"
+    id="elementor-waypoints-js"></script>
+  <script data-two_delay_id="two_64f85683b7b26" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2"
+    id="jquery-ui-core-js"></script>
+  <script data-two_delay_src="inline" data-two_delay_id="two_64f85683b7b49" type="text/javascript"
+    id="elementor-frontend-js-before"></script>
+  <script data-two_delay_id="two_64f85683b7ba5" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.15.1"
+    id="elementor-frontend-js"></script>
+  <script data-two_delay_id="two_64f85683b7bca" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor-pro/assets/js/elements-handlers.min.js?ver=3.8.2"
+    id="pro-elements-handlers-js"></script>
+  <script data-two_delay_id="two_64f85683b7bf6" type="text/javascript"
+    data-two_delay_src="https://propertyingurugram.in/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.8.2"
+    id="e-sticky-js"></script>
+
+  <script data-two_delay_id="two_dispatchEvent_script"></script>
+  <style id="two_fix_scroll_issues_style">
+    {
+      overflow-y: visible !important;
+    }
+  </style>
+  <script data-pagespeed-no-defer data-two-no-delay>
+    (function () {
+      window.addEventListener("two_css_loaded", function () {
+        window.two_observer = new IntersectionObserver((items) => {
+          items.forEach((item) => {
+            if (item.isIntersecting) {
+              if (item.target.dataset.settings) {
+                let settings = JSON.parse(item.target.dataset.settings);
+                let animation = settings.animation
+                  ? settings.animation
+                  : settings._animation
+                    ? settings._animation
+                    : "zoomIn";
+                let delay = settings.animation_delay
+                  ? settings.animation_delay
+                  : settings._animation_delay
+                    ? settings._animation_delay
+                    : 0;
+                setTimeout(() => {
+                  item.target.className =
+                    item.target.className.replace("elementor-invisible", "") +
+                    " animated " +
+                    animation;
+                }, delay);
+                delete settings.animation;
+                delete settings._animation;
+                item.target.dataset.settings = JSON.stringify(settings);
+              } else {
+                item.target.className =
+                  item.target.className.replace("elementor-invisible", "") +
+                  " animated zoomIn";
+              }
+            }
+          });
+        }, {});
+        document.querySelectorAll(".elementor-invisible").forEach((e) => {
+          window.two_observer.observe(e);
+        });
+      });
+    })();
+  </script>
+  <script data-pagespeed-no-defer data-two-no-delay type="text/javascript"
+    src="https://propertyingurugram.in/wp-content/plugins/tenweb-speed-optimizer/includes/external/js/vanilla-lazyload/lazyload.min.js"></script>
+  <script data-pagespeed-no-defer data-two-no-delay>
+    if (typeof two_lazyLoadInstance === "undefined") {
+      window.two_lazyLoadInstance = new LazyLoad({
+        callback_applied: function (element, instance) {
+          let settings = instance._settings;
+          var bgDataValue = element.getAttribute(
+            "data-" + settings.data_bg_multi
+          );
+          if (!bgDataValue) {
+            return;
+          }
+          if (
+            window
+              .getComputedStyle(element)
+              .getPropertyValue("background-image") !== bgDataValue
+          ) {
+            let style = element.getAttribute("style");
+            style += "background-image: " + bgDataValue + " !important;";
+            element.setAttribute("style", style);
+          }
+        },
+      });
+    } else {
+      two_lazyLoadInstance.update();
+    }
+    window.addEventListener("scroll", function () {
+      if (two_lazyLoadInstance.toLoadCount > 0) {
+        two_lazyLoadInstance.update();
+      }
+    });
+  </script>
+</body>
+
+</html>
+
+<!-- =^..^= Cached =^..^= -->
