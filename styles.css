@@ -1,0 +1,73 @@
+/* Custom styles */
+.custom-container {
+    padding: 20px 0;
+    /* Add spacing at the top and bottom if needed */
+}
+
+.custom-card {
+    padding: 20px;
+    background-color: #165788;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #fff;
+    font-family: 'Electrolux Sans Regular', sans-serif;
+    margin-bottom: 20px;
+    height: 100%;
+    /* Make cards take up full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distribute content evenly */
+}
+
+.section-title {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.custom-list {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+    /* Allow list to grow to fill space */
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+    .custom-card {
+        max-width: 100%;
+    }
+}
+
+
+/* Custom styles for key features */
+.custom-key-features {
+    font-family: 'Electrolux Sans Regular', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    /* Center alignment by default for large screens */
+}
+
+.custom-key-features-list {
+    list-style: none;
+    font-size: 18px;
+}
+
+/* Reduce font size and left-align on small screens */
+@media (max-width: 767px) {
+    .custom-key-features {
+        font-size: 16px;
+        /* Reduce font size for small screens */
+        text-align: left;
+        /* Left-align on small screens */
+    }
+
+        .custom-key-features-list {
+            list-style: none;
+            font-size: 16px;
+            align-items: left;
+            text-align: left;
+        }
+}
